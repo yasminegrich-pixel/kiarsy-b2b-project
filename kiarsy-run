@@ -1,0 +1,7 @@
+#!/bin/bash
+source ~/kiarsy/venv/bin/activate
+echo "🚀 Starting Kiarsy Pipeline..."
+python ~/kiarsy/scripts/ingest_test.py
+python ~/kiarsy/scripts/scrape_company.py
+python ~/kiarsy/scripts/report.py
+echo "✅ Pipeline Complete. Check ~/kiarsy/output/"

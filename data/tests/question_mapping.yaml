@@ -1,0 +1,15 @@
+"1. What outcome matters most to your organization?":
+  "Empowering women leaders": {value: "women's empowerment", weight: 4}
+  "Protecting the environment": {value: "sustainability & green economy", weight: 4}
+  "Creating jobs for young people": {value: "youth development", weight: 4}
+  "Growing the regional economy": {value: "regional leadership", weight: 4}
+"2. Who should benefit most from your work?":
+  "Women and girls": {value: "women's empowerment", weight: 3}
+  "Displaced people and refugees": {value: "social inclusion of refugees/IDPs", weight: 3}
+  "Young founders and students": {value: "youth development", weight: 3}
+  "Local communities": {value: "inclusivity & opportunity", weight: 3}
+"3. How should your brand feel?":
+  "Fast and ambitious": {value: "entrepreneurship & innovation", weight: 3}
+  "Connected and collaborative": {value: "collaboration & partnership", weight: 3}
+  "Responsible and accountable": {value: "impact & accountability", weight: 3}
+  "Green and sustainable": {value: "sustainability & green economy", weight: 3}

@@ -1,0 +1,14 @@
+id: medicine-wheel
+name: "The Medicine Wheel / Sacred Hoop"
+culture: amerindienne
+meaning: >
+  Symbol of balance, harmony and the interconnectedness of all life;
+  embodies the Four Directions and the cycles/stages of life; teaches
+  right relationship between people.
+values:
+  - "inclusivity & opportunity"
+  - "impact & accountability"
+sources:
+  - "https://www.nlm.nih.gov/nativevoices/exhibition/healing-ways/medicine-ways/medicine-wheel.html"
+design_notes: "Circle-with-cross geometry representing the ecosystem."
+popularity: high

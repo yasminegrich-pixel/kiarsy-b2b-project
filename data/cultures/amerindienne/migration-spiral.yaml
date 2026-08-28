@@ -1,0 +1,13 @@
+id: migration-spiral
+name: "The Migration Spiral (Hopi/Puebloan petroglyph)"
+culture: amerindienne
+meaning: >
+  A spiral with outward direction signifies the clan journeying outward —
+  migration, the path of existence, people on the move.
+values:
+  - "social inclusion of refugees/IDPs"
+  - "movement toward sustainability"
+sources:
+  - "https://www.nps.gov/chcu/learn/historyculture/petroglyphs-pictographs.htm"
+design_notes: "Outward spiral representing scaling from local to global."
+popularity: medium
