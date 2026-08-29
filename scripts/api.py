@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException
 from pathlib import Path
 from collections import defaultdict
 import yaml
+from fastapi.middleware.cors import CORSMiddleware
 
 DATA_DIR = Path.home() / "kiarsy" / "data"
 
@@ -11,6 +12,13 @@ app = FastAPI(
     title="KIARSY B2B Design Engine API",
     description="Cultural symbol recommendation engine for B2B clients",
     version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ---------- Helpers ----------

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiarsy Design Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-8 font-sans">
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- Header -->
+        <header class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Kiarsy Cultural Engine</h1>
+                <p class="text-slate-500">B2B Design Recommendations Dashboard</p>
+            </div>
+            <select id="companySelect" class="w-full md:w-64 p-3 border border-slate-300 rounded-lg shadow-sm bg-white text-lg font-medium focus:ring-2 focus:ring-amber-500 outline-none cursor-pointer">
+                <option value="">Select a Client...</option>
+            </select>
+        </header>
+
+        <!-- Main Content -->
+        <div id="content" class="hidden animate-fade-in">
+            
+            <!-- Value Profile -->
+            <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h2 class="text-xl font-bold mb-4 text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-amber-500 rounded-full"></span> Core Value Profile
+                </h2>
+                <div id="profileGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+            </section>
+
+            <!-- Recommendations -->
+            <section id="recommendations"></section>
+            
+        </div>
+        
+        <div id="loading" class="text-center py-20 text-slate-400 hidden">
+            <svg class="animate-spin h-8 w-8 mx-auto mb-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Analyzing cultural matches...
+        </div>
+    </div>
+
+    <script>
+        const API = 'http://127.0.0.1:8000';
+        const select = document.getElementById('companySelect');
+        const content = document.getElementById('content');
+        const loading = document.getElementById('loading');
+
+        // 1. Load Companies into Dropdown
+        fetch(`${API}/companies`)
+            .then(r => r.json())
+            .then(data => {
+                data.companies.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.name;
+                    select.appendChild(opt);
+                });
+            });
+
+        // 2. Handle Company Selection
+        select.addEventListener('change', async (e) => {
+            const id = e.target.value;
+            if (!id) {
+                content.classList.add('hidden');
+                return;
+            }
+            
+            content.classList.add('hidden');
+            loading.classList.remove('hidden');
+            
+            try {
+                const res = await fetch(`${API}/companies/${id}/recommendations`);
+                const data = await res.json();
+                render(data);
+            } catch (err) {
+                alert('Error fetching data. Is the API server running?');
+            } finally {
+                loading.classList.add('hidden');
+            }
+        });
+
+        // 3. Render the Dashboard
+        function render(data) {
+            content.classList.remove('hidden');
+            
+            // Render Value Profile
+            const profileGrid = document.getElementById('profileGrid');
+            profileGrid.innerHTML = data.value_profile.slice(0, 6).map(v => `
+                <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <span class="font-medium text-slate-700 text-sm">${v.value}</span>
+                    <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-md text-xs font-bold">${v.points} pts</span>
+                </div>
+            `).join('');
+
+            // Render Cultural Recommendations
+            const recs = document.getElementById('recommendations');
+            recs.innerHTML = '';
+            
+            const cultureStyles = {
+                amazigh: { border: 'border-emerald-500', bg: 'bg-emerald-50', text: 'text-emerald-800', icon: '🌿' },
+                amerindienne: { border: 'border-sky-500', bg: 'bg-sky-50', text: 'text-sky-800', icon: '🪶' },
+                subsaharienne: { border: 'border-rose-500', bg: 'bg-rose-50', text: 'text-rose-800', icon: '🌍' }
+            };
+
+            for (const [culture, symbols] of Object.entries(data.recommendations)) {
+                const style = cultureStyles[culture] || { border: 'border-slate-300', bg: 'bg-slate-50', text: 'text-slate-800', icon: '🏛️' };
+                
+                const section = document.createElement('div');
+                section.className = 'mb-10';
+                section.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-4 capitalize text-slate-800 flex items-center gap-2">
+                        <span>${style.icon}</span> ${culture} Tradition
+                    </h3>
+                `;
+                
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 md:grid-cols-3 gap-6';
+                
+                symbols.forEach(sym => {
+                    grid.innerHTML += `
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 ${style.border} hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="text-lg font-bold text-slate-900 leading-tight">${sym.name}</h4>
+                                <span class="bg-slate-900 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap ml-2 shadow-sm">${sym.match_score} pts</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-4 line-clamp-3 leading-relaxed">${sym.meaning}</p>
+                            <div class="border-t border-slate-100 pt-3">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Perfectly Embodies:</p>
+                                <div class="flex flex-wrap gap-2">
+                                    ${sym.matched_values.map(v => `<span class="text-[11px] ${style.bg} ${style.text} px-2 py-1 rounded-md font-medium">${v}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                section.appendChild(grid);
+                recs.appendChild(section);
+            }
+        }
+    </script>
+</body>
+</html>
