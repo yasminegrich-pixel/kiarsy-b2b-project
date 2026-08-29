@@ -2,12 +2,15 @@ id: aslem
 name: "Aslem — The Fish"
 culture: amazigh
 meaning: >
-  The fish (often shown in pairs) wards off the evil eye and is a sign of
-  safety — a protective, beneficial emblem.
+  The fish (often shown in pairs, sometimes with a net) wards off the evil
+  eye and is a sign of safety — protected under the water; a beneficial
+  protective emblem.
 values:
-  - "social inclusion of refugees/IDPs"
-  - "impact & accountability"
+  - "Trust, Security & Risk Management"
 sources:
   - "https://sahara45shop.com/berber-symbols-and-their-meaning/"
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-025)"
 design_notes: "Paired-fish motif as a welcome/safety mark."
 popularity: medium
+usage: restricted
+usage_note: "Talismanic function — define respectful usage perimeter."

@@ -3,11 +3,15 @@ name: Flat6Labs
 channel_1:
   source: Automated Web Scraping
   values:
-    sustainability & green economy: 4
-    women's empowerment: 1
-    youth development: 2
-    entrepreneurship & innovation: 10
-    collaboration & partnership: 9
-    social inclusion of refugees/IDPs: 1
-    impact & accountability: 1
-    regional leadership: 5
+    Women's Empowerment & Gender Equity: 1
+    Refugee Support & Immigrant Inclusion: 1
+    Youth Development & Next-Gen Education: 2
+    Environmental Sustainability & Climate Action: 5
+    Entrepreneurship & Innovation: 10
+    Collaboration, Partnerships & Ecosystems: 8
+    Leadership, Governance & Authority: 3
+    Trust, Security & Risk Management: 1
+    Care, Health & Community Nurturing: 1
+    Resilience, Endurance & Crisis Survival: 1
+    Economic Growth & Abundance: 5
+    Transformation, Renewal & Change Management: 3

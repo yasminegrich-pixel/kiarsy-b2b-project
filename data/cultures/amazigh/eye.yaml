@@ -1,0 +1,14 @@
+id: eye
+name: "The Eye (Œil)"
+culture: amazigh
+meaning: >
+  Protection against the evil eye; the cross at its center sends the evil
+  back in the four directions.
+values:
+  - "Trust, Security & Risk Management"
+sources:
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-017)"
+design_notes: "Amulet-style seal marks."
+popularity: high
+usage: restricted
+usage_note: "Talismanic function — define a respectful usage perimeter."

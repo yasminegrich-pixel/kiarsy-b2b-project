@@ -1,0 +1,13 @@
+id: hanneton
+name: "Khanfous — The Cockchafer (Hanneton)"
+culture: amazigh
+meaning: >
+  Symbol of movement (a form suggesting rotation and flight).
+values:
+  - "Transformation, Renewal & Change Management"
+sources:
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-035)"
+design_notes: "Energy/movement motif."
+popularity: medium
+usage: open
+usage_note: "Validate the published geometry first: the rotating form may visually evoke a swastika."

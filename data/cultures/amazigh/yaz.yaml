@@ -2,13 +2,17 @@ id: yaz
 name: "Yaz (ⵣ) — The Free Man"
 culture: amazigh
 meaning: >
-  The Tifinagh letter "yaz," meaning "free man" — the very meaning of
-  the word Amazigh; a symbol of identity, freedom, and dignity.
+  Tifinagh letter "yaz," meaning "free man" — the very meaning of the
+  word Amazigh; a symbol of identity, freedom, dignity and pride; per
+  expert Mongi Bouras (Tamezret museum) it also marks the person stably
+  identified with the earth.
 values:
-  - "entrepreneurship & innovation"
-  - "inclusivity & opportunity"
-  - "social inclusion of refugees/IDPs"
+  - "Diversity, Inclusion & Minority Rights"
+  - "Justice, Human Rights & Transparency"
 sources:
   - "https://letsgo2morocco.wordpress.com/2019/12/19/tifinagh-the-ancient-amazigh-berber-script/"
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-009)"
 design_notes: "Bold central glyph; hero mark for flagship gifts."
 popularity: high
+usage: open
+usage_note: "Identity symbol with political charge — define conditions for commercial use."

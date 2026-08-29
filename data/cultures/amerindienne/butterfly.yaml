@@ -1,0 +1,15 @@
+id: butterfly
+name: "The Butterfly"
+culture: amerindienne
+meaning: >
+  Symbol of transformation, renewal, and the changing phases of life.
+  In many traditions, it is seen as a messenger of joy and a sign that
+  change is coming.
+values:
+  - "Transformation, Renewal & Change Management"
+  - "Women's Empowerment & Gender Equity"
+sources:
+  - "Kiarsy Amérindienne Database (Butterfly)"
+design_notes: "Transformation motif for pivot/scale phases."
+popularity: medium
+usage: open

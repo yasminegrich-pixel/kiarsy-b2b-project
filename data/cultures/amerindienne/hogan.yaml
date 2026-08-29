@@ -1,0 +1,17 @@
+id: hogan
+name: "The Hogan (Home)"
+culture: amerindienne
+meaning: >
+  The traditional sacred dwelling of the Navajo (Diné). It represents
+  the universe, shelter, harmony, and the deep connection between the
+  family and the earth. The door always faces east to greet the dawn.
+values:
+  - "Refugee Support & Immigrant Inclusion"
+  - "Care, Health & Community Nurturing"
+  - "Heritage, Craftsmanship & Legacy"
+sources:
+  - "Kiarsy Amérindienne Database (Hogan)"
+design_notes: "The ultimate symbol of shelter and belonging."
+popularity: medium
+usage: open
+usage_note: "Respect architectural specifics (e.g., door facing east) if depicting structurally."

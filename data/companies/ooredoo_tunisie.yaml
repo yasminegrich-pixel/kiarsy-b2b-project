@@ -1,0 +1,13 @@
+id: ooredoo_tunisie
+name: Ooredoo Tunisie
+channel_1:
+  source: Manual Research (Excel Import)
+  values:
+    Collaboration, Partnerships & Ecosystems: 10
+    Entrepreneurship & Innovation: 10
+    Leadership, Governance & Authority: 10
+    Diversity, Inclusion & Minority Rights: 7
+    Women's Empowerment & Gender Equity: 7
+    Youth Development & Next-Gen Education: 7
+    Justice, Human Rights & Transparency: 4
+    Environmental Sustainability & Climate Action: 4

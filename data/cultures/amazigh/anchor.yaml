@@ -1,0 +1,16 @@
+id: anchor
+name: "The Anchor (Ancre)"
+culture: amazigh
+meaning: >
+  Solidity, permanence, fidelity; inner balance and lucidity against
+  troubled waters; kaolin wall decor of Souk-El-Thenine (Maâtkas, Kabylie)
+  inspired by weaving.
+values:
+  - "Trust, Security & Risk Management"
+  - "Resilience, Endurance & Crisis Survival"
+sources:
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-038)"
+design_notes: "Perfect example of regional specificity."
+popularity: medium
+usage: open
+usage_note: "Respect the precise regional origin (Maâtkas, Kabylie)."

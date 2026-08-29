@@ -1,0 +1,13 @@
+id: frog
+name: "The Frog (Grenouille)"
+culture: amazigh
+meaning: >
+  Purity and fertility: lives and reproduces only in clean water.
+values:
+  - "Environmental Sustainability & Climate Action"
+  - "Transformation, Renewal & Change Management"
+sources:
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-024)"
+design_notes: "Beautiful ecological story aligned with Kiarsy sustainability."
+popularity: medium
+usage: open

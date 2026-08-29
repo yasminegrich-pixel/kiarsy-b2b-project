@@ -1,0 +1,13 @@
+id: swallow
+name: "The Swallow (Hirondelle)"
+culture: amazigh
+meaning: >
+  Herald of spring; cyclical return, femininity, fecundity.
+values:
+  - "Transformation, Renewal & Change Management"
+  - "Refugee Support & Immigrant Inclusion"
+sources:
+  - "Kiarsy Amazigh Master Database v2 (AMZ-SYM-033)"
+design_notes: "Calendar activation (spring)."
+popularity: medium
+usage: open

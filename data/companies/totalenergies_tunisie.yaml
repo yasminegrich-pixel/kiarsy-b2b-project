@@ -1,0 +1,13 @@
+id: totalenergies_tunisie
+name: TotalEnergies Tunisie
+channel_1:
+  source: Manual Research (Excel Import)
+  values:
+    Trust, Security & Risk Management: 10
+    Leadership, Governance & Authority: 7
+    Collaboration, Partnerships & Ecosystems: 10
+    Heritage, Craftsmanship & Legacy: 10
+    Women's Empowerment & Gender Equity: 7
+    Youth Development & Next-Gen Education: 7
+    Diversity, Inclusion & Minority Rights: 4
+    Environmental Sustainability & Climate Action: 7

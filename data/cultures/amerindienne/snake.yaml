@@ -1,0 +1,15 @@
+id: snake
+name: "The Snake (Rattlesnake)"
+culture: amerindienne
+meaning: >
+  Unlike Western symbolism, the snake (especially the rattlesnake) is
+  revered as a symbol of healing, wisdom, rain-bringing, and the power
+  of nature. It represents speed, defiance, and protection.
+values:
+  - "Environmental Sustainability & Climate Action"
+  - "Transformation, Renewal & Change Management"
+sources:
+  - "Kiarsy Amérindienne Database (Snake)"
+design_notes: "Healing and rain motif for climate/water-tech startups."
+popularity: medium
+usage: open
