@@ -1,0 +1,171 @@
+-- KIARSY seed data
+INSERT INTO anchor_versions (label, notes) VALUES
+('stage2_v1', 'Stage 2 anchor text frozen; 21 dimensions incl. achievement_care and austerity_abundance');
+
+INSERT INTO dimensions (dimension_id, dimension_name, dimension_type, low_label, high_label, low_anchor, high_anchor, anchor_version_id, sort_order) VALUES
+('restraint_abundance','Restraint ↔ Abundance (ornament)','aesthetic','minimal ornament','dense ornament','Aesthetic restraint, minimal ornamentation, understatement valued.','Dense ornamentation, layered pattern, abundance as richness.',1,1),
+('geometric_figural','Geometric ↔ Figural','aesthetic','abstract geometric','figural naturalistic','Abstract pattern and geometric form, living images avoided or minimized.','Realistic or idealized depiction of people, animals, and scenes.',1,2),
+('symmetry_organic','Symmetry ↔ Organic flow','aesthetic','formal symmetry','organic asymmetry','Formal symmetry and balanced, ordered composition.','Irregular, organic, asymmetric composition and flow.',1,3),
+('muted_vivid','Muted ↔ Vivid palette','aesthetic','muted earth-toned','saturated vivid','Muted, earth-toned, understated color palette.','Saturated, vivid, high-chroma color used boldly.',1,4),
+('power_distance','Power Distance','values','authority questioned','authority respected','Authority is questioned and expected to justify itself; hierarchy is minimized.','Authority and rank are respected without question; hierarchy is clear and formal.',1,5),
+('individualism_collectivism','Individualism ↔ Collectivism','values','individual first','group first','Individual goals and personal choice come first.','Group, family, and collective interest come first.',1,6),
+('uncertainty_avoidance','Uncertainty Avoidance','values','risk tolerated','rules reduce risk','Ambiguity and risk are comfortably tolerated.','Rules and rituals exist to reduce ambiguity and risk.',1,7),
+('long_short_term','Long ↔ Short-Term Orientation','values','long horizon','immediate results','Patience, thrift, and long-range planning are emphasized.','Immediate results and present obligations are emphasized.',1,8),
+('indulgence_restraint','Indulgence ↔ Restraint','values','gratification encouraged','self-control valued','Free enjoyment and gratification of desires is encouraged.','Self-control and regulation of desire is valued.',1,9),
+('traditional_secular','Traditional ↔ Secular-rational','values','traditional authority','rational authority','Religious and traditional authority shape daily life.','Secular and rational authority shape daily life.',1,10),
+('survival_self_expression','Survival ↔ Self-expression','values','security first','autonomy first','Security and material survival are the priority.','Autonomy, self-expression, and quality of life are the priority.',1,11),
+('high_low_context','High ↔ Low-Context Communication','values','indirect implicit','explicit direct','Meaning relies on shared context and indirection.','Meaning is stated explicitly and directly.',1,12),
+('universalism_particularism','Universalism ↔ Particularism','values','same rules for all','relationship obligations','The same rules apply to everyone regardless of relationship.','Obligations to specific relationships outweigh general rules.',1,13),
+('human_nature','Human–Nature: Coexist ↔ Control','values','coexist adapt','master control','Living in harmony with nature and adapting to its limits.','Mastering, engineering, and controlling the natural environment.',1,14),
+('rural_urban','Rural ↔ Urban Orientation','values','rural land-based','urban industrial','Rural, land-based, and community-centered life.','Urban, city-centered, and industrial life.',1,15),
+('continuity_reinvention','Continuity ↔ Reinvention','values','preserve precedent','break precedent','Preserving inherited tradition and precedent.','Embracing novelty and breaking from precedent.',1,16),
+('sacred_secular','Sacred-integrated ↔ Secular-separated','values','sacred woven in','sacred separate','Religion is woven through all of daily life.','Religion is a separate, private, or optional domain.',1,17),
+('hospitality_transactional','Hospitality ↔ Transactional','values','relationship-first','efficiency-first','Generosity and relationship-first exchange with guests.','Efficiency-first, transactional exchange.',1,18),
+('honor_conscience','Honor/Face ↔ Individual conscience','values','reputation regulates','conscience regulates','Public reputation and honor regulate behavior.','Internalized personal conscience regulates behavior.',1,19),
+('achievement_care','Achievement ↔ Care/Quality-of-Life','values','achievement earns respect','care earns respect','Competition, assertiveness, and material achievement are what earns respect.','Cooperation, modesty, and care for others are what earns respect.',1,20),
+('austerity_abundance','Material Austerity ↔ Material Abundance','values','frugality downplayed','prosperity celebrated','Frugality and modest consumption are valued; wealth is downplayed.','Prosperity and material success are openly displayed and celebrated.',1,21);
+
+INSERT INTO universal_values (value_id, value_name, definition) VALUES
+('V01','Women''s Empowerment & Gender Equity','Female founders, closing the gender gap, women''s rights'),
+('V02','Diversity, Inclusion & Minority Rights','People of color, marginalized groups, accessibility, DEI'),
+('V03','Refugee Support & Immigrant Inclusion','Displaced populations, migration, shelter, integration'),
+('V04','Youth Development & Next-Gen Education','Students, young founders, mentorship, future leaders'),
+('V05','Environmental Sustainability & Climate Action','Green tech, circular economy, conservation'),
+('V06','Entrepreneurship & Innovation','Startups, agility, tech, scaling, pivoting'),
+('V07','Collaboration, Partnerships & Ecosystems','B2B unity, joint ventures, mergers, community building'),
+('V08','Leadership, Governance & Authority','Executive vision, market dominance, institutional power'),
+('V09','Trust, Security & Risk Management','Cybersecurity, legal, data privacy, insurance, safety'),
+('V10','Justice, Human Rights & Transparency','NGOs, anti-corruption, fair trade, legal equity'),
+('V11','Care, Health & Community Nurturing','Healthcare, HR, social impact, mental health'),
+('V12','Heritage, Craftsmanship & Legacy','Luxury, artisan support, historical preservation, local roots'),
+('V13','Resilience, Endurance & Crisis Survival','Overcoming hardship, long-term endurance'),
+('V14','Economic Growth & Abundance','Wealth creation, agriculture, finance'),
+('V15','Transformation, Renewal & Change Management','Rebranding, second chances, systemic change, momentum');
+
+INSERT INTO tiers (tier_name, tier_weight) VALUES
+('Explicit',1.0),('Strongly Supported',0.7),('Possible',0.4);
+
+INSERT INTO match_strengths (strength, definition, test_we_apply) VALUES
+('core','Primary documented meaning matches the value directly.','Would the central meaning already BE this value in one sentence?'),
+('secondary','Real source-backed theme, one interpretive step beyond the central meaning.','Does the source support this only as a related idea?'),
+('stretch','Plausible but needs 2+ interpretive steps. Flag before client use.','Would I need 2+ logical steps to convince a skeptical reader?');
+
+INSERT INTO value_dimension_signatures (value_id, dimension_id, position, loading, rationale) VALUES
+('V01','power_distance',0.25,1.0,'equity challenges hierarchy'),
+('V01','universalism_particularism',0.15,1.0,'same rules regardless of gender'),
+('V01','traditional_secular',0.70,0.5,'challenges traditional gender authority'),
+('V01','survival_self_expression',0.70,0.5,'autonomy and self-expression'),
+('V01','honor_conscience',0.70,0.5,'conscience over honor-regulated roles'),
+('V02','universalism_particularism',0.10,1.0,'equal rules for all groups'),
+('V02','power_distance',0.30,0.5,'flattens exclusionary hierarchy'),
+('V02','individualism_collectivism',0.65,0.5,'belonging and participation'),
+('V02','survival_self_expression',0.70,0.5,'acceptance of diverse identities'),
+('V02','hospitality_transactional',0.30,0.5,'welcoming the outsider'),
+('V03','hospitality_transactional',0.10,1.0,'hospitality and shelter as duty'),
+('V03','universalism_particularism',0.10,1.0,'universal obligation to displaced'),
+('V03','individualism_collectivism',0.70,0.5,'community absorbs newcomers'),
+('V03','survival_self_expression',0.30,0.5,'safety of the displaced'),
+('V04','long_short_term',0.10,1.0,'long-range investment'),
+('V04','achievement_care',0.75,1.0,'nurturing is the core mechanism'),
+('V04','traditional_secular',0.65,0.5,'education as rational authority'),
+('V04','survival_self_expression',0.65,0.5,'developing autonomy'),
+('V05','human_nature',0.05,1.0,'coexist within limits'),
+('V05','long_short_term',0.10,1.0,'intergenerational horizon'),
+('V05','indulgence_restraint',0.70,0.5,'restraint of consumption'),
+('V05','austerity_abundance',0.30,0.5,'downplays overconsumption'),
+('V06','continuity_reinvention',0.90,1.0,'breaking precedent is the core act'),
+('V06','uncertainty_avoidance',0.15,1.0,'comfort with risk'),
+('V06','achievement_care',0.15,1.0,'achievement earns respect'),
+('V06','individualism_collectivism',0.30,0.5,'founder agency'),
+('V06','traditional_secular',0.65,0.5,'secular-rational drive'),
+('V07','individualism_collectivism',0.85,1.0,'collective interest first'),
+('V07','hospitality_transactional',0.20,1.0,'relationship-first exchange'),
+('V07','universalism_particularism',0.65,0.5,'obligations to partners'),
+('V07','high_low_context',0.35,0.5,'shared context'),
+('V07','power_distance',0.35,0.5,'flatter power between partners'),
+('V08','power_distance',0.85,1.0,'formal hierarchy'),
+('V08','honor_conscience',0.30,0.5,'reputation and face'),
+('V08','traditional_secular',0.60,0.5,'rational-legal authority'),
+('V08','achievement_care',0.25,0.5,'achievement orientation'),
+('V09','uncertainty_avoidance',0.90,1.0,'rules reduce risk'),
+('V09','high_low_context',0.70,0.5,'explicit contracts'),
+('V09','universalism_particularism',0.20,0.5,'equal rules under law'),
+('V09','continuity_reinvention',0.30,0.5,'reliability as continuity'),
+('V10','universalism_particularism',0.05,1.0,'same rules for everyone'),
+('V10','high_low_context',0.80,1.0,'transparency is explicit'),
+('V10','power_distance',0.15,1.0,'authority must justify'),
+('V10','honor_conscience',0.70,0.5,'internalized conscience'),
+('V10','traditional_secular',0.70,0.5,'rational-legal framework'),
+('V11','achievement_care',0.90,1.0,'care is the defining pole'),
+('V11','individualism_collectivism',0.70,0.5,'community as unit of care'),
+('V11','hospitality_transactional',0.25,0.5,'relationship-first'),
+('V11','survival_self_expression',0.30,0.5,'wellbeing as priority'),
+('V12','continuity_reinvention',0.05,1.0,'preserving precedent'),
+('V12','traditional_secular',0.15,1.0,'traditional authority'),
+('V12','long_short_term',0.20,0.5,'multi-generational horizon'),
+('V12','sacred_secular',0.30,0.5,'heritage often sacred-integrated'),
+('V12','rural_urban',0.30,0.5,'rooted local craft'),
+('V12','honor_conscience',0.35,0.5,'reputation across generations'),
+('V13','survival_self_expression',0.10,1.0,'survival is the priority'),
+('V13','indulgence_restraint',0.70,0.5,'self-control in hardship'),
+('V13','long_short_term',0.25,0.5,'endurance is long horizon'),
+('V14','austerity_abundance',0.90,1.0,'prosperity celebrated'),
+('V14','achievement_care',0.15,1.0,'material achievement'),
+('V14','indulgence_restraint',0.30,0.5,'enjoyment of prosperity'),
+('V14','rural_urban',0.70,0.5,'urban industrial'),
+('V14','individualism_collectivism',0.30,0.5,'individual wealth agency'),
+('V15','continuity_reinvention',0.95,1.0,'reinvention is the core act'),
+('V15','uncertainty_avoidance',0.25,0.5,'tolerates ambiguity of change'),
+('V15','traditional_secular',0.65,0.5,'rational change management'),
+('V15','survival_self_expression',0.65,0.5,'renewal and self-expression');
+
+INSERT INTO cultures (culture_id, culture_name) VALUES
+('amazigh','Amazigh'),('amerindienne','Amérindienne'),('subsaharienne','Subsaharienne — Akan/Adinkra');
+
+INSERT INTO symbols (symbol_id, symbol_name, culture_id, documented_meaning, sources, verification_level) VALUES
+('AMZ-001','Yaz — The Free Man','amazigh','Tifinagh letter meaning free man; identity, freedom, dignity.','Wikipedia — Berber flag','verified'),
+('AMZ-002','Izem / Lion''s Paw','amazigh','Strength, nobility, courage, protection.','Mimouna Rugs','verified'),
+('AMZ-003','Tazerzit (Amazigh Fibula)','amazigh','Triangular silver brooch: femininity, protection, women''s wealth; union/alliance of two families.','Wikipedia; skyjems.ca; PSU catalogue','verified'),
+('AMR-001','Medicine Wheel / Sacred Hoop','amerindienne','Balance, harmony, Four Directions, interconnectedness.','U.S. National Library of Medicine','verified'),
+('AMR-002','Grandmother Moon','amerindienne','Feminine guardian; watcher of Earth, water, cycles.','Anishnawbe Mushkiki','verified'),
+('AKA-001','Sankofa','subsaharienne','Go back and fetch it; learning from the past for a wiser future.','Wikipedia — Sankofa','verified'),
+('AKA-002','Adinkrahene','subsaharienne','Chief of the Adinkra symbols; greatness, charisma, leadership.','adinkrasymbols.org','verified'),
+('AKA-003','Nkyinkyim','subsaharienne','The zigzag path; initiative, dynamism, adaptability.','Symbol Sage','verified');
+
+INSERT INTO symbol_value_matches (symbol_id, value_id, strength, why) VALUES
+('AMZ-001','V06','core','free man creating his own path'),
+('AMZ-001','V02','secondary','dignity extends to every beneficiary'),
+('AMZ-002','V08','core','strength and apex protector'),
+('AMZ-003','V01','core','femininity, women status and wealth'),
+('AMZ-003','V07','core','documented union/alliance meaning'),
+('AMR-001','V02','core','all peoples united in one hoop'),
+('AMR-001','V07','secondary','right relationship between people'),
+('AMR-001','V10','secondary','balance and responsibility to every relation'),
+('AMR-002','V01','core','feminine guardian figure'),
+('AMR-002','V05','secondary','guardianship of Earth cycles'),
+('AKA-001','V04','core','intergenerational learning'),
+('AKA-001','V10','stretch','reframing learning as answering for outcomes'),
+('AKA-002','V08','core','chief of symbols, leadership'),
+('AKA-003','V06','core','initiative and dynamism on a twisting path');
+
+INSERT INTO companies (company_id, company_name, industry, country_region, company_summary, date_profiled, profiled_by) VALUES
+('CO-002','TotalEnergies Tunisie','Multi-energy: retail, manufacturing, green hydrogen, renewables','Tunisia','Full footprint since 1948; 1000+ employees; ~160 stations; Rades training center; green hydrogen project.','2026-08-19','Claude + user'),
+('CO-003','Ooredoo Tunisie','Telecommunications (mobile, internet, 5G)','Tunisia','Largest mobile operator, 7.5M+ subscribers; first private telecom; 20+ year CSR program Tounes T3ich.','2026-08-19','Claude + user');
+
+INSERT INTO company_values (company_id, value_id, tier, evidence_summary) VALUES
+('CO-002','V09','Explicit','Safety stated as cardinal value; HSE programs; Rades center purpose'),
+('CO-002','V08','Strongly Supported','Rades: first in Africa-Middle East, 500+ trained/year'),
+('CO-002','V07','Explicit','20+ year partnerships; CEO frames partners as friends'),
+('CO-002','V12','Explicit','Active since 1948; local anchoring as strategic priority'),
+('CO-002','V01','Strongly Supported','First Tunisian woman CEO; 43% women executives'),
+('CO-002','V04','Strongly Supported','12+ year road-safety education; 650 youth, 100+ schools'),
+('CO-002','V02','Possible','2019 program for Sub-Saharan student integration'),
+('CO-002','V05','Strongly Supported','Solar, Total Eren renewables, green hydrogen MOU'),
+('CO-003','V07','Explicit','Connecting is an official Group brand value; CNOT partnership to 2028'),
+('CO-003','V06','Explicit','Challenging is an official Group value; first 3G, now 5G'),
+('CO-003','V08','Explicit','Largest operator, first private telecom'),
+('CO-003','V02','Strongly Supported','Tounes T3ich: disability, orphans, rural families'),
+('CO-003','V01','Strongly Supported','2026 initiative targeting rural women economic autonomy'),
+('CO-003','V04','Strongly Supported','Foot Academy since 2013; youth athlete development'),
+('CO-003','V10','Possible','Caring defined around responsibility; impact framing'),
+('CO-003','V05','Possible','WWF Earth Hour; rural durable development');
