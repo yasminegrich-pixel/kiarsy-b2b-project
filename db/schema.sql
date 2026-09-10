@@ -154,6 +154,8 @@ CREATE TABLE company_dimension_scores (
     prior_position numeric(4,3) CHECK (prior_position BETWEEN 0 AND 1),
     final_position numeric(4,3) CHECK (final_position BETWEEN 0 AND 1),
     n_evidence     int,
+    disagreement   numeric(4,3),
+    method         text,
     PRIMARY KEY (company_id, dimension_id, run_id)
 );
 
@@ -162,7 +164,9 @@ CREATE TABLE company_symbol_affinity (
     symbol_id         text NOT NULL REFERENCES symbols(symbol_id),
     run_id            int  NOT NULL REFERENCES scoring_runs(run_id),
     similarity        numeric(6,4) NOT NULL CHECK (similarity BETWEEN -1 AND 1),
+    raw_similarity     numeric(6,4),
     shared_dimensions int  NOT NULL CHECK (shared_dimensions >= 3),
+    evidence_weight    numeric(6,4),
     rank_in_culture   int,
     computed_at       timestamptz NOT NULL DEFAULT now(),
     PRIMARY KEY (company_id, symbol_id, run_id)

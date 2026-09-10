@@ -55,7 +55,7 @@ st.markdown(f"""
 }}
 
 .block-container {{
-    padding-top: 1.5rem;
+    padding-top: 3.5rem;
 }}
 
 h1, h2, h3 {{
