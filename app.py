@@ -8,6 +8,9 @@ from datetime import date
 import html
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # ==========================================================
 # PAGE CONFIG
 # ==========================================================
@@ -357,7 +360,13 @@ def safe(x):
 # ==========================================================
 @st.cache_resource
 def get_connection():
-    return psycopg2.connect(dbname="kiarsy_affinity", user="yasso")
+    return psycopg2.connect(
+        dbname=os.getenv("DB_NAME", "kiarsy_affinity"),
+        user=os.getenv("DB_USER", "postgres"),
+        password=os.getenv("DB_PASSWORD", ""),
+        host=os.getenv("DB_HOST", "localhost"),
+        port=os.getenv("DB_PORT", "5432"),
+    )
 
 conn = get_connection()
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
