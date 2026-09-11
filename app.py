@@ -7,6 +7,7 @@ import psycopg2.extras
 from datetime import date
 import html
 import os
+import uuid
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -526,8 +527,23 @@ with tab1:
         st.dataframe(df_dims, use_container_width=True, hide_index=True)
 
 # ==========================================================
-# TAB 2 — SYMBOL MATCHES
 # ==========================================================
+# TAB 2 — SYMBOL MATCHES (internal view, unchanged layout)
+# ==========================================================
+def _readiness(status, sim, note):
+    note = (note or "").lower()
+    serious = ["slavery","captivity","sacred","funerary","funeral","reserved for",
+               "legal","eagle feather","katsina","kachina","do not use","do not reproduce","religious"]
+    if status == "restricted":
+        return "🚫 BLOCKED", "status-blocked", "BLOCKED"
+    if sim is None or sim <= 0:
+        return "❌ NO FIT", "status-nofit", "NO FIT"
+    if any(k in note for k in serious):
+        return "🔍 REVIEW", "status-review", "REVIEW"
+    if sim < 0.15:
+        return "🔍 REVIEW", "status-review", "REVIEW"
+    return "✅ READY", "status-ready", "READY"
+
 with tab2:
     st.title(f"Symbol Matches — {selected_company_name}")
 
@@ -535,36 +551,22 @@ with tab2:
     statuses = ["READY", "REVIEW", "NO FIT", "BLOCKED"]
 
     f1, f2, f3 = st.columns([1.2, 1.2, 1])
-
     with f1:
-        selected_cultures = st.multiselect(
-            "Filter by culture",
-            cultures,
-            default=cultures
-        )
-
+        selected_cultures = st.multiselect("Filter by culture", cultures, default=cultures)
     with f2:
-        selected_statuses = st.multiselect(
-            "Filter by readiness",
-            statuses,
-            default=statuses
-        )
-
+        selected_statuses = st.multiselect("Filter by readiness", statuses, default=statuses)
     with f3:
         top_n = st.slider("Number of results", 5, 50, 15)
 
     filtered = []
     for m in all_matches:
         sim = float(m["similarity"])
-        badge, css, label = classify_readiness(m["usage_status"], sim, m["usage_note"])
-
+        badge, css, label = _readiness(m["usage_status"], sim, m["usage_note"])
         if m["culture_name"] not in selected_cultures:
             continue
         if label not in selected_statuses:
             continue
-
         filtered.append((m, badge, css, label))
-
     filtered = filtered[:top_n]
 
     if not filtered:
@@ -573,8 +575,9 @@ with tab2:
         for rank, (m, badge, css, label) in enumerate(filtered, 1):
             sim = float(m["similarity"])
             raw = float(m["raw_similarity"]) if m["raw_similarity"] is not None else None
+            raw_txt = f"{raw:.3f}" if raw is not None else "—"
             culture_color = get_culture_color(m["culture_name"])
-
+            note_html = f'<div class="usage-note">⚠️ {safe(m["usage_note"])}</div>' if m["usage_note"] else ""
             st.markdown(f"""
             <div class="symbol-card" style="border-left-color:{culture_color};">
                 <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
@@ -583,228 +586,263 @@ with tab2:
                         <div class="symbol-meta">
                             <span class="culture-pill" style="background:{culture_color};">{safe(m["culture_name"])}</span>
                             &nbsp; Similarity <b>{sim:.3f}</b>
-                            &nbsp; Raw <b>{raw:.3f}</b>
+                            &nbsp; Raw <b>{raw_txt}</b>
                             &nbsp; Shared dims <b>{m["shared_dimensions"]}</b>
                         </div>
                     </div>
                     <span class="{css}">{badge}</span>
                 </div>
                 <div class="symbol-meaning">"{safe(m["documented_meaning"])}"</div>
-                {f'<div class="usage-note">⚠️ {safe(m["usage_note"])}</div>' if m["usage_note"] else ""}
+                {note_html}
             </div>
             """, unsafe_allow_html=True)
 
 # ==========================================================
-# TAB 3 — CLIENT EXTRAIT
+# TAB 3 — CLIENT EXTRAIT (clean, client-facing: no badges, no notes)
 # ==========================================================
 with tab3:
     st.title("Client Extrait")
 
-    st.markdown('<div class="no-print">', unsafe_allow_html=True)
-    c1, c2, c3 = st.columns([1, 1, 2])
-
+    c1, c2 = st.columns([1, 3])
     with c1:
         extrait_n = st.slider("Symbols in extract", 3, 10, 6)
-
     with c2:
-        include_review = st.toggle("Include review symbols", value=True)
-
-    with c3:
         components.html("""
-        <button onclick="window.parent.print()" style="
-            background:#111111;
-            color:white;
-            border:none;
-            padding:10px 18px;
-            font-weight:700;
-            cursor:pointer;
-            margin-top:26px;">
-            🖨️ Print / Save as PDF
-        </button>
+        <button onclick="window.parent.print()" style="background:#111111;color:white;border:none;
+        padding:10px 18px;font-weight:700;cursor:pointer;margin-top:26px;">🖨️ Print / Save as PDF</button>
         """, height=70)
+    st.caption("You can also press Ctrl+P and choose “Save as PDF”. The layout is print-optimized (A4 landscape).")
 
-    st.info("The extract is optimized for A4 landscape. You can also press Ctrl+P and choose “Save as PDF”.")
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Prepare extract symbols
+    # READY + REVIEW symbols appear, but with NO internal flags shown
     extrait_symbols = []
     for m in all_matches:
         sim = float(m["similarity"])
-        badge, css, label = classify_readiness(m["usage_status"], sim, m["usage_note"])
-
-        if label == "NO FIT" or label == "BLOCKED":
+        badge, css, label = _readiness(m["usage_status"], sim, m["usage_note"])
+        if label in ("NO FIT", "BLOCKED"):
             continue
-        if label == "REVIEW" and not include_review:
-            continue
-
-        extrait_symbols.append((m, badge, css, label))
-
+        extrait_symbols.append((m, sim))
     extrait_symbols = extrait_symbols[:extrait_n]
 
-    # Values grouped
-    tier_groups = {
-        "Explicit": [],
-        "Strongly Supported": [],
-        "Possible": []
-    }
-
-    for r in value_rows:
+    cur.execute("""SELECT uv.value_name, cv.tier FROM company_values cv
+                   JOIN universal_values uv ON uv.value_id = cv.value_id
+                   WHERE cv.company_id = %s""", (selected_company_id,))
+    tier_groups = {"Explicit": [], "Strongly Supported": [], "Possible": []}
+    for r in cur.fetchall():
         if r["tier"] in tier_groups:
             tier_groups[r["tier"]].append(r["value_name"])
 
     today_str = date.today().strftime("%d %B %Y")
-
     st.markdown('<div class="extrait-wrap">', unsafe_allow_html=True)
 
-    # Header
     hcol1, hcol2 = st.columns([1, 2])
     with hcol1:
         if os.path.exists(LOGO_HORIZONTAL):
             st.image(LOGO_HORIZONTAL, width=210)
         else:
             st.markdown("## KIARSY")
-
     with hcol2:
         st.markdown(f"""
         <div style="text-align:right;">
             <div class="extrait-title">{safe(company_info["company_name"])}</div>
-            <div class="extrait-sub">
-                {safe(company_info["industry"])} · {safe(company_info["country_region"])} · {today_str}
-            </div>
+            <div class="extrait-sub">{safe(company_info["industry"])} · {safe(company_info["country_region"])} · {today_str}</div>
             <div class="extrait-sub">Cultural Affinity Extract · Run #{RUN_ID}</div>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # Top summary cards
     m1, m2, m3 = st.columns(3)
     with m1:
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">Cultural Dimensions</div>
-            <div class="metric-value">{len(dims_data)}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-card"><div class="metric-label">Cultural Dimensions</div><div class="metric-value">{len(dims_data)}</div></div>', unsafe_allow_html=True)
     with m2:
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">Recommended Symbols</div>
-            <div class="metric-value">{len(extrait_symbols)}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-card"><div class="metric-label">Recommended Symbols</div><div class="metric-value">{len(extrait_symbols)}</div></div>', unsafe_allow_html=True)
     with m3:
-        best_name = extrait_symbols[0][0]["symbol_name"] if extrait_symbols else "—"
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-label">Leading Symbol</div>
-            <div style="font-size:1.05rem;font-weight:700;">{safe(best_name)}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        best = extrait_symbols[0][0]["symbol_name"] if extrait_symbols else "—"
+        st.markdown(f'<div class="metric-card"><div class="metric-label">Leading Symbol</div><div style="font-size:1.05rem;font-weight:700;">{safe(best)}</div></div>', unsafe_allow_html=True)
 
-    # Values
     st.markdown('<div class="extrait-section-title">I · Company Values</div>', unsafe_allow_html=True)
-
-    for tier_name, values in tier_groups.items():
-        if values:
-            css = ""
-            if tier_name == "Strongly Supported":
-                css = "value-chip-strong"
-            elif tier_name == "Possible":
-                css = "value-chip-possible"
-
+    for tier_name, vals in tier_groups.items():
+        if vals:
+            chip = "" if tier_name == "Explicit" else ("value-chip-strong" if tier_name == "Strongly Supported" else "value-chip-possible")
             st.markdown(f"<b>{tier_name}</b>", unsafe_allow_html=True)
-            chips = "".join([f'<span class="value-chip {css}">{safe(v)}</span>' for v in values])
-            st.markdown(chips, unsafe_allow_html=True)
+            st.markdown("".join(f'<span class="value-chip {chip}">{safe(v)}</span>' for v in vals), unsafe_allow_html=True)
 
-    # Dimensions — compact bar view, easier than radar for print
     st.markdown('<div class="extrait-section-title">II · Strongest Cultural Signals</div>', unsafe_allow_html=True)
-
     if dims_data:
         df_dim = pd.DataFrame(dims_data, columns=["Dimension", "Score", "Method"])
         df_dim["Score"] = df_dim["Score"].astype(float)
         df_dim["distance"] = (df_dim["Score"] - 0.5).abs()
         df_dim = df_dim.sort_values("distance", ascending=False).head(6)
-
         for _, row in df_dim.iterrows():
             score = float(row["Score"])
             st.markdown(f"""
             <div style="margin:8px 0;">
                 <div style="font-size:0.86rem;"><b>{safe(row["Dimension"])}</b> · {score:.3f}</div>
-                <div style="height:8px;background:#EEE8DD;">
-                    <div style="height:8px;background:{CLAY};width:{score*100:.1f}%;"></div>
-                </div>
+                <div style="height:8px;background:#EEE8DD;"><div style="height:8px;background:{CLAY};width:{score*100:.1f}%;"></div></div>
             </div>
             """, unsafe_allow_html=True)
 
-    # Symbols
     st.markdown('<div class="extrait-section-title">III · Recommended Symbols</div>', unsafe_allow_html=True)
-
     if not extrait_symbols:
-        st.warning("No client-ready or reviewable symbols available with current filters.")
+        st.warning("No client-suitable symbols available.")
     else:
         for i in range(0, len(extrait_symbols), 2):
             cols = st.columns(2)
             for j, col in enumerate(cols):
-                if i + j >= len(extrait_symbols):
+                idx = i + j
+                if idx >= len(extrait_symbols):
                     continue
-
-                m, badge, css, label = extrait_symbols[i + j]
-                sim = float(m["similarity"])
+                m, sim = extrait_symbols[idx]
                 culture_color = get_culture_color(m["culture_name"])
-
                 with col:
                     st.markdown(f"""
                     <div class="extrait-symbol" style="border-left:5px solid {culture_color};">
-                        <div style="display:flex;justify-content:space-between;gap:10px;">
-                            <div class="extrait-symbol-name">{i+j+1}. {safe(m["symbol_name"])}</div>
-                            <span class="{css}">{badge}</span>
-                        </div>
-                        <div class="extrait-small">
-                            {safe(m["culture_name"])} · Alignment <b>{sim:.3f}</b> · {m["shared_dimensions"]} dims
-                        </div>
-                        <div style="font-family:Georgia,serif;margin-top:8px;font-size:0.95rem;line-height:1.45;">
-                            “{safe(m["documented_meaning"])}”
-                        </div>
+                        <div class="extrait-symbol-name">{idx+1}. {safe(m["symbol_name"])}</div>
+                        <div class="extrait-small">{safe(m["culture_name"])} · Alignment <b>{sim:.3f}</b> · {m["shared_dimensions"]} dims</div>
+                        <div style="font-family:Georgia,serif;margin-top:8px;font-size:0.95rem;line-height:1.45;">“{safe(m["documented_meaning"])}”</div>
                     </div>
                     """, unsafe_allow_html=True)
 
-    # Notes
-    notes = []
-    for m, badge, css, label in extrait_symbols:
-        if m["usage_note"]:
-            notes.append((m["symbol_name"], m["usage_note"]))
-
-    if notes:
-        st.markdown('<div class="extrait-section-title">IV · Usage Notes</div>', unsafe_allow_html=True)
-        for name, note in notes[:6]:
-            st.markdown(f"""
-            <div class="extrait-small" style="margin-bottom:6px;">
-                ⚠️ <b>{safe(name)}:</b> {safe(note)}
-            </div>
-            """, unsafe_allow_html=True)
-
     st.markdown(f"""
-    <div style="border-top:1px solid {LINE};margin-top:20px;padding-top:10px;text-align:center;color:{SLATE};font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;">
+    <div style="border-top:1px solid {LINE};margin-top:20px;padding-top:10px;text-align:center;color:{SLATE};
+    font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;">
         Generated by Kiarsy Cultural Affinity Engine · {today_str}
     </div>
     """, unsafe_allow_html=True)
-
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==========================================================
-# TAB 4 — ADMIN PLACEHOLDER
+# TAB 4 — ADMIN (add / scrape / delete)
 # ==========================================================
 with tab4:
-    st.title("Admin Portal")
-    st.info("Next step: this tab will let employees add companies, paste evidence, assign value tiers, and launch scoring without editing code.")
+    st.title("⚙️ Admin Portal")
+    admin_tab1, admin_tab2 = st.tabs(["➕ Add / Scrape Company", "🗑️ Manage / Delete Companies"])
 
-    st.markdown("""
-    Planned modules:
-    - Add new company
-    - Add/edit company values
-    - Upload new symbol workbook
-    - Run scorer
-    - Generate client extract
-    - Export PDF/report
-    """)
+    with admin_tab1:
+        st.subheader("Add New Company")
+        with st.form("add_company_form"):
+            c_name = st.text_input("Company Name")
+            c_ind = st.text_input("Industry")
+            c_reg = st.text_input("Region / Country")
+            c_url = st.text_input("Website URL (e.g., https://company.com)")
+            submitted = st.form_submit_button("1. Scrape Website Text")
+
+        if submitted and c_url:
+            import requests
+            from bs4 import BeautifulSoup
+            from urllib.parse import urlparse, urljoin
+
+            def scrape_site(url, timeout=15):
+                HEADERS = {"User-Agent": "Mozilla/5.0 (Kiarsy Cultural Affinity Engine)"}
+                def clean(soup):
+                    for tag in soup(["script", "style", "nav", "footer", "header", "aside", "form"]):
+                        tag.decompose()
+                    return " ".join(soup.get_text(separator=" ", strip=True).split())
+                def try_fetch(u):
+                    try:
+                        r = requests.get(u, headers=HEADERS, timeout=timeout, allow_redirects=True)
+                        if r.status_code == 200:
+                            return r.text
+                    except Exception:
+                        pass
+                    return None
+                html_txt = try_fetch(url)
+                if html_txt:
+                    c_soup = BeautifulSoup(html_txt, "html.parser")
+                    c_text = clean(c_soup)
+                    links = c_soup.find_all("a", href=True)
+                    targets = set()
+                    keywords = ["a-propos", "qui-sommes-nous", "rse", "csr", "engagement", "valeurs", "about", "mission"]
+                    for link in links:
+                        href = link["href"].lower()
+                        if any(k in href for k in keywords):
+                            targets.add(urljoin(url, link["href"]))
+                    for deep in list(targets)[:2]:
+                        sub = try_fetch(deep)
+                        if sub:
+                            c_text += "\n\n" + clean(BeautifulSoup(sub, "html.parser"))
+                    return c_text, url
+                return None, None
+
+            with st.spinner("Scraping website..."):
+                text_res, used_url = scrape_site(c_url)
+            if text_res:
+                st.session_state["scraped_text"] = text_res
+                st.session_state["form_name"] = c_name
+                st.session_state["form_ind"] = c_ind
+                st.session_state["form_reg"] = c_reg
+                st.rerun()
+            else:
+                st.error("❌ Could not connect to this URL.")
+                st.session_state["scraped_text"] = ""
+
+        if st.session_state.get("scraped_text"):
+            st.markdown("---")
+            st.subheader("2. Review Text & Assign Values")
+            if len(st.session_state["scraped_text"]) < 1000:
+                st.warning("⚠️ This site loads content via JavaScript; only surface text was captured. Paste fuller text below if needed.")
+            edited_text = st.text_area("Scraped / pasted text", value=st.session_state["scraped_text"], height=220)
+
+            cur.execute("SELECT value_id, value_name FROM universal_values ORDER BY value_id")
+            uvs = cur.fetchall()
+            tiers = ["Explicit", "Strongly Supported", "Possible"]
+            value_assignments = []
+            for v in uvs:
+                cols = st.columns([0.5, 2.5, 2, 4])
+                with cols[0]:
+                    checked = st.checkbox("Use", key=f"chk_{v['value_id']}")
+                with cols[1]:
+                    st.markdown(f"**{v['value_name']}**")
+                with cols[2]:
+                    tier = st.selectbox("Tier", tiers, key=f"tier_{v['value_id']}", disabled=not checked)
+                with cols[3]:
+                    quote = st.text_input("Evidence quote", key=f"quote_{v['value_id']}", disabled=not checked)
+                if checked:
+                    value_assignments.append((v["value_id"], tier, quote))
+
+            if st.button("3. Save Company to Database", type="primary"):
+                if not st.session_state.get("form_name"):
+                    st.error("Company name missing.")
+                elif not edited_text:
+                    st.error("Text is empty.")
+                else:
+                    try:
+                        c_id = f"CO-{uuid.uuid4().hex[:4].upper()}"
+                        cur.execute("""INSERT INTO companies (company_id, company_name, industry, country_region, company_summary)
+                                       VALUES (%s,%s,%s,%s,%s)""",
+                                    (c_id, st.session_state["form_name"], st.session_state.get("form_ind"),
+                                     st.session_state.get("form_reg"), edited_text))
+                        for vid, tier, quote in value_assignments:
+                            cur.execute("""INSERT INTO company_values (company_id, value_id, tier, evidence_summary)
+                                           VALUES (%s,%s,%s,%s)""", (c_id, vid, tier, quote))
+                        conn.commit()
+                        st.success(f"✅ Saved {st.session_state['form_name']}. Now run the auto-pipeline to score it:")
+                        st.code(f'python scripts/auto_pipeline.py "{st.session_state["form_name"]}" "<url>"')
+                        for k in ["scraped_text", "form_name", "form_ind", "form_reg"]:
+                            st.session_state.pop(k, None)
+                    except Exception as e:
+                        conn.rollback()
+                        st.error(f"Database error: {e}")
+
+    with admin_tab2:
+        st.subheader("Manage / Delete Companies")
+        st.warning("⚠️ Deleting a company permanently removes its values, scores, and symbol matches.")
+        cur.execute("SELECT company_id, company_name FROM companies ORDER BY company_name")
+        all_companies = {r["company_name"]: r["company_id"] for r in cur.fetchall()}
+        if all_companies:
+            del_name = st.selectbox("Select company to delete", list(all_companies.keys()))
+            del_id = all_companies[del_name]
+            if st.button("🗑️ Delete Company Permanently", type="primary"):
+                try:
+                    cur.execute("DELETE FROM company_symbol_affinity WHERE company_id = %s", (del_id,))
+                    cur.execute("DELETE FROM company_dimension_scores WHERE company_id = %s", (del_id,))
+                    cur.execute("DELETE FROM company_values WHERE company_id = %s", (del_id,))
+                    cur.execute("DELETE FROM companies WHERE company_id = %s", (del_id,))
+                    conn.commit()
+                    st.success(f"✅ {del_name} deleted.")
+                    st.rerun()
+                except Exception as e:
+                    conn.rollback()
+                    st.error(f"Failed to delete: {e}")
+        else:
+            st.info("No companies in the database.")
