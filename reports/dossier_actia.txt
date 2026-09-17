@@ -1,0 +1,346 @@
+L’électronique
+en mouvement
+				
+Actualités & Événements
+								
+													14 septembre 2026							
+			                
+			
+			                
+							À l’occasion d’IAA Transportation 2026, ACTIA dévoilera une démonstration en direct de sa plateforme...                        
+										                
+								
+													8 septembre 2026							
+			                
+			
+			                
+							À InnoTrans 2026, ACTIA franchit une nouvelle étape dans la convergence technologique entre les...                        
+										                
+								
+													1 septembre 2026							
+			                
+			
+			                
+							Dans un environnement réglementaire exigeant, ACTIA a mis en place une organisation industrielle...                        
+										                Inscrivez-vous pour recevoir toutes nos actualités
+L’électronique en mouvement
+pour un mode plus durable
+				
+Depuis sa création en 1986, l’esprit d’innovation et la politique d’ACTIA lui ont permis de conserver une longueur d’avance sur la concurrence. Inventeur du diagnostic électronique et pionnier de l’architecture véhicule, notamment multiplexée, ACTIA s’appuie sur sa vaste expertise pour se différencier, préserver son indépendance et maintenir sa position de leader du secteur.
+Les secteurs que nous
+accompagnons 
+				
+									Chez ACTIA, nous croyons que la technologie doit être un moteur de progrès au service d’une société plus responsable. C’est pourquoi nous mettons l’électronique en mouvement pour un monde plus durable, en accompagnant la transformation des secteurs clés de la mobilité, de l’aéronautique et de l’énergie.
+Avec des solutions innovantes, fiables et durables, nous aidons nos clients à conjuguer performance, conformité et transition énergétique.								
+				
+Nos engagements RSE
+									ACTIA est animé par l’ambition d’une contribution positive au monde, portée par la richesse humaine et la dynamique d’innovation au cœur de chaque entité du Groupe.								
+				
+Excellence
+technologique
+et industrielle
+				
+									Pour ACTIA, l’excellence technologique et industrielle constitue le socle d’une exigence qualité sans compromis.								
+				
+ACTIA dans le monde
+									30 sociétés dans 17 pays : ACTIA conjugue dimension mondiale et ancrage local								
+				
+Année de création
+			
+				
+				0
+				
+			
+		
+Chiffre d'affaire consolidé
+2025
+			
+2025
+				
+				0
+				M€
+			
+		
+Collaborateurs
+dans le monde
+			
+dans le monde
+				≈
+				0
+				
+			
+		
+Sociétés
+(5 usines de production électroniques
+et 6 centres de R&D)
+			
+(5 usines de production électroniques
+et 6 centres de R&D)
+				
+				0
+
+Division
+Mobility
+				
+Les expertises de la Division Mobility d’ACTIA pour une mobilité terrestre connectée, sûre et durable
+									Depuis sa création en 1986, ACTIA conçoit dans ses bureaux d’études et fabrique dans ses usines des équipements et systèmes électroniques embarqués pour adresser les différents enjeux de la mobilité terrestre dans les domaines du transport routier et ferroviaire, du transport de marchandises et de personnes, dans le domaine de l’agriculture ou de la construction.
+Partout dans le monde, les solutions ACTIA équipent les constructeurs et les opérateurs des :
+				
+Partout dans le monde, les solutions ACTIA équipent les constructeurs et les opérateurs des :
+- Véhicules commerciaux : bus, cars, camions, véhicules utilitaires,
+- Véhicules industriels et spéciaux : machines agricoles et engins de constructions,
+- Véhicules légers et de mobilité douce (micromobilité, VAE, véhicules intermédiaires)
+- Trains et tramway
+Les enjeux de la mobilité pour les constructeurs et les opérateurs de véhicules
+Pour les constructeurs et les opérateurs de véhicules, ACTIA propose une gamme complète de solutions matérielles et logicielles embarquées, conçues pour répondre aux enjeux majeurs de la mobilité d’aujourd’hui.
+Nos offres comprennent :
+- Une gamme complète de solutions matérielles et logicielles embarquées : intégration cohérente de hardware, software et services pour maximiser performance, sécurité et durabilité.
+- Des architectures : architectures évolutives, prêtes pour les véhicules de nouvelle génération et les Architecture Software-Defined Vehicle (SDV).
+- Des services : accompagnement complet, maintenance proactive et gestion des systèmes électroniques sur tout le cycle de vie.
+Ces solutions permettent de :
+- Offrir la meilleure expérience utilisateur véhicule (UVX) grâce au confort, à la sécurité et à des interfaces intuitives.
+- Accompagner la transition énergétique et favoriser l’usage des énergies renouvelables.
+- Déployer des véhicules intelligents et évolutifs, avec une électronique et un logiciel modulables.
+Renforcer la durabilité et l’efficacité des véhicules, avec une démarche d’Analyse du Cycle de Vie (ACV).
+Les solutions de la Division Mobility : Électronique et services pour la mobilité
+									Une gamme complète de solutions matérielles embarquées :
+				
+- Unités de contrôle zonales pour la gestion de l’électronique et de la puissance
+- Plateformes de calcul haute performance (corps/châssis – cockpit/ADAS)
+- Interfaces homme-machine : écrans intelligents, combinés, tableaux de bord, instrumentation
+- Systèmes multimédias pour l’infodivertissement (Infotainment & Entertainment)
+- Plateformes télématiques et interfaces de communication véhicule
+Une expertise unique dans les architectures véhicules connectées, gérées et augmentées
+									ACTIA accompagne ses clients dans la définition, la gestion et l’optimisation de leurs architectures véhicules, tout en les guidant vers les systèmes de mobilité du futur :
+				
+- Digitalisation du cockpit
+- Architecture E/E centralisée
+- Architectures connectées et Over-The-Air (accès aux données en temps réel et déploiement de services)
+- Prêt pour le Software-Defined Vehicle (SDV)
+- Gestion de la batterie et de l’énergie pour véhicules électriques
+- Architecture cybersécurisée et conforme aux réglementations
+- Fonctions avancées de sécurité fonctionnelle et de sûreté
+Une offre de services complète proposée par la Division Mobility aux acteurs de la mobilité terrestre
+									Maintenance en conditions opérationnelles et de sécurité : diagnostic à distance, maintenance prédictive, mises à jour pour la sécurité et la cybersécurité
+				
+- Télémétrie : transmission et surveillance des données véhicules
+- Mises à jour logicielles à distance (FOTA)
+- Services opérationnels : vidéosurveillance, supervision des systèmes, gestion des actifs
+Des partenariats flexibles fondés sur un esprit de collaboration unique
+									ACTIA s’adapte aux besoins de ses clients avec une gamme complète de modes de collaboration :
+				
+- Produits sur étagère pour une intégration et une configuration facilitée
+- Plateformes génériques pour accélérer les cas d’usage et applications clients
+- Solutions sur mesure répondant à des exigences spécifiques
+- Partenariats de co-ingénierie pour mutualiser les expertises et innover ensemble
+Porté par l’excellence technologique et industrielle d’ACTIA
+									ACTIA associe ingénierie de pointe et production responsable pour proposer des systèmes électroniques performants à l’empreinte environnementale minimale :
+				
+- Centres de R&D et d’ingénierie avancés, moteurs d’innovation dans les systèmes embarqués, connectés et sécurisés
+- Éco-conception intégrée dès les premières phases de développement pour réduire l’impact environnemental
+- Usines intelligentes, connectées et cybersécurisées alignées avec la vision de l’Usine du Futur
+- Fabrication électronique de haute qualité et services tout au long du cycle de vie
+- Un engagement constant pour l’excellence du design à la production, jusqu’au support long terme
+
+Nos activités
+L’électronique en mouvement
+				
+ACTIA et son expertise électronique
+									Depuis sa création en 1986, ACTIA s’investit dans la conception, la fabrication, la maintenance et l’exploitation de systèmes et solutions d’électronique embarquée dans des domaines et des environnements particulièrement exigeants : la mobilité terrestre, l’aéronautique, le spatial, l’énergie et plus globalement l’industrie.
+Fort de son excellence technologique et industrielle, le Groupe se donne pour mission, sur chacun de ses marchés, de relever pour ses clients les enjeux d’une électronique innovante, créatrice de valeur et durable.
+La dimension internationale d’ACTIA et son identité d’Entreprise de Taille Intermédiaire jouent un rôle central dans la relation de partenariat que le Groupe développe avec ses clients. Ainsi la proximité, la réactivité et la qualité globale auxquelles s’engage ACTIA au quotidien sont au cœur d’une collaboration pérenne.
+				
+Fort de son excellence technologique et industrielle, le Groupe se donne pour mission, sur chacun de ses marchés, de relever pour ses clients les enjeux d’une électronique innovante, créatrice de valeur et durable.
+La dimension internationale d’ACTIA et son identité d’Entreprise de Taille Intermédiaire jouent un rôle central dans la relation de partenariat que le Groupe développe avec ses clients. Ainsi la proximité, la réactivité et la qualité globale auxquelles s’engage ACTIA au quotidien sont au cœur d’une collaboration pérenne.
+Nos solutions et services électroniques
+- Calculateurs électroniques embarqués et convertisseurs de puissance
+- Solutions d’instrumentation et multimédia
+- Plateformes de connectivité et de services
+- Services connectés pour le diagnostic, la gestion du cycle de vie et l’exploitation
+- Terminaux Satcom et amplificateurs de puissance
+- Solutions de distribution, transport et gestion d’énergie
+- Services d’ingénierie matérielle et logicielle
+- Services de fabrication électronique et de maintenance en condition opérationnelle
+Des solutions électroniques au cœur des grands enjeux
+- La gestion du cycle de vie et la durabilité : maximiser la durabilité et le taux de service, assurer la maintenance et réduire l’empreinte environnementale des solutions ACTIA et de celles de ses clients.
+- La transition énergétique : contribuer à réduire la consommation d’énergie, favoriser et accompagner l’utilisation d’énergie renouvelable.
+- La sécurité : assurer la sécurité des équipements, des systèmes, des véhicules et des utilisateurs.
+- La connectivité : améliorer la performance, l’efficacité opérationnelle et proposer des expériences utilisateurs optimales.
+
+Division
+Aerospace
+				
+Aéronautique, Spatial & SatCom : les domaines d’excellence d’ACTIA Aerospace
+Acteur international, ACTIA Aerospace déploie son expertise technologique au service des secteurs Aéronautique, Spatial et SatCom, sur les marchés civils, gouvernementaux et de défense.
+Partenaire de confiance des industriels majeurs, ACTIA Aerospace conçoit et fabrique des systèmes critiques, alliant performance, fiabilité et innovation.
+Forte de plusieurs décennies d’expérience, l’entreprise se distingue par sa capacité à opérer tout au long de la chaîne de valeur, dans des domaines où l’exigence ne laisse place à aucun compromis.
+Les services industriels électroniques d’ACTIA Aerospace
+L’entreprise excelle dans la sous-traitance de fabrication électronique (Electronics Manufacturing Services – EMS) et la gestion de l’obsolescence, assurant la continuité de systèmes embarqués à forte criticité.
+Son impact est tangible : toutes les trois secondes, un avion décolle dans le monde avec un équipement ACTIA à son bord.
+Avec plus de 25 ans d’expertise en production avionique, l’entreprise livre chaque année plus de 6 000 calculateurs de vol et a été le premier EMS européen accrédité NADCAP en 2008.
+Les activités d'ACTIA Aerospace dans les SatCom
+Au sol, ACTIA Aerospace conçoit et fabrique des segments sols complets (amplificateurs de puissance, terminaux, systèmes de supervision).
+L’entreprise accompagne des clients civils, institutionnels et militaires sur l’ensemble de la chaîne de valeur : conception, fabrication, intégration, mise en service, maintien en condition opérationnelle.
+Avec plus de 50 ans d’expérience, 2 000 systèmes livrés, et 500 missions techniques menées chaque année dans plus de 20 pays, ACTIA Aerospace est un acteur incontournable dans le déploiement des infrastructures SatCom à l’échelle mondiale.
+L’expertise d’ACTIA Aerospace pour les applications spatiales
+ACTIA Aerospace est aussi un fournisseur clé de solutions industrielles pour les constellations, avec plus de 1 500 équipements livrés, démontrant sa capacité à conjuguer qualité spatiale et production en série.
+L’entreprise conçoit également des équipements sur mesure pour tous types de missions, et a déjà participé à plus de 100 missions spatiales.
+Enfin, ACTIA Aerospace propose une gamme complète d’équipements électroniques sur étagère : ordinateurs de bord, unités de traitement, mémoires de masse, convertisseurs de puissance, récepteurs et navigateurs GNSS.
+La division s’appuie sur l’expertise historique de sa filiale STEEL Electronique, forte de plus de 40 ans de savoir-faire dans la conception et la réalisation de systèmes électroniques embarqués.
+Cette synergie permet de répondre avec agilité à tous les besoins.
+
+Division
+Energy
+				
+ACTIA Energy : une expertise reconnue en gestion, transmission et distribution d’énergie
+									Forte de plus de 40 ans d’expérience dans les systèmes de télécommande et d’automatisation, ACTIA Energy est un acteur reconnu dans le développement, l’intégration et le déploiement de solutions innovantes pour la gestion, la transmission et la distribution d’énergie électrique.
+La force principale de la division réside dans son offre de services complète et flexible, de la conception à la livraison clé en main, adaptée aux grands acteurs de plusieurs secteurs :
+ACTIA Energy contribue également au développement des réseaux électriques intelligents et joue un rôle actif dans l’accélération de la décarbonation et de la transition énergétique.
+				
+La force principale de la division réside dans son offre de services complète et flexible, de la conception à la livraison clé en main, adaptée aux grands acteurs de plusieurs secteurs :
+- Transmission et distribution électrique
+- Infrastructures ferroviaires
+- Réseaux de télécommunications
+- Industrie
+ACTIA Energy contribue également au développement des réseaux électriques intelligents et joue un rôle actif dans l’accélération de la décarbonation et de la transition énergétique.
+Des solutions énergétiques modulaires, innovantes et cybersécurisées pour des réseaux plus intelligents
+									ACTIA Energy propose une large gamme d’expertises et de solutions, toutes fondées sur des bases communes :
+				
+- Conformité stricte aux normes de cybersécurité et aux protocoles industriels (notamment IEC 60870-5-101, IEC 60870-5-104, HNZ, ICCP TASE.2, etc.)
+- Services d’accompagnement de bout en bout : ingénierie, développement personnalisé, intégration système, installation sur site et mise en service, formation, préparation opérationnelle et maintenance de la sécurité
+- Systèmes de télécommande et SCADA
+- Commande numérique et automatisation
+- Systèmes de protection et RTU
+- Surveillance des réseaux moyenne/basse tension
+- Armoires électriques et panneaux d’intégration
+- Solutions de connectivité basse tension
+
+Nos solutions pour véhicules
+Off-Highway
+				
+									ACTIA maîtrise l’ensemble des couches technologiques des véhicules, offrant aux constructeurs une approche globale pour accélérer la digitalisation des véhicules industriels. L’exploitation en temps réel des données devient notamment un levier essentiel pour optimiser l’efficacité opérationnelle et la maintenance prédictive. Grâce à l’analyse à distance des machines, qui croise données techniques des équipements et données d’usage sur le terrain, ACTIA aide les constructeurs à maximiser la performance et la disponibilité de leurs véhicules.								
+				
+Nos solutions : une offre technologique complète pour digitaliser les véhicules industriels
+									En intégrant calculateurs embarqués, boîtiers de télématique avancés, digital cabin, architectures flexibles et solutions d’exploitation des données, ACTIA propose un écosystème technologique unique et modulaire, structuré en services par couches sur l’ensemble du cycle de vie du véhicule.
+Cette approche permet aux OEMs de personnaliser les données et de développer des services sur-mesure, parfaitement adaptés aux besoins spécifiques de leurs clients finaux et utilisateurs
+				
+Cette approche permet aux OEMs de personnaliser les données et de développer des services sur-mesure, parfaitement adaptés aux besoins spécifiques de leurs clients finaux et utilisateurs
+Une architecture flexible et interopérabilité: sécurité, cybersécurité et évolutivité intégrées
+									ACTIA propose des architectures électroniques flexibles et sécurisées, conçues pour intégrer la digitalisation tout en garantissant une longue durée de vie et des mises à jour à distance.
+L’approche repose sur une couche logicielle flexible et modulaire, permettant une évolution continue sans compromettre les performances du véhicule. Cette architecture favorise l’interopérabilité entre les systèmes, assurant une intégration fluide et la possibilité de mises à jour logicielles à distance (OTA). Grâce à cette flexibilité, ACTIA accompagne les constructeurs dans l’adaptation aux évolutions technologiques et réglementaires, garantissant ainsi une performance durable et une longue durée de vie des véhicules.								
+				
+Solutions hardware : des calculateurs et boîtiers de télématique sur mesure pour des environnements extrêmes
+									La couche hardware d’ACTIA représente l’un des piliers de son offre. Les engins hors route, agricoles et de chantier nécessitent des systèmes électroniques capables de fonctionner pendant plusieurs décennies, dans des conditions extrêmes (chocs, poussière, températures extrêmes). Le groupe se distingue par sa capacité à concevoir et à produire en interne des calculateurs et des boîtiers de télématique durcis adaptés aux exigences strictes du secteur Off-Highway et autres applications industrielles.								
+				
+Des calculateurs embarqués haute performance pour des architectures évolutives
+									ACTIA propose des calculateurs embarqués robustes, permettant l’automatisation des fonctions critiques et l’optimisation de la performance des véhicules.								
+				
+Innovation
+Le High-Performance Computer (HPC) ACTIA,
+une brique essentielle pour la digitalisation des véhicules industriels
+				
+									Conçu pour les véhicules industriels de nouvelle génération (SDV), il centralise les fonctions critiques dans un seul calculateur embarqué,
+intégrant intelligence artificielle, cybersécurité native et architecture sans ventilateur.
+Grâce à sa puissance de calcul et à sa modularité, le HPC remplace plusieurs calculateurs traditionnels,
+simplifie l’architecture du véhicule, et ouvre la voie à une digitalisation avancée et pérenne.								
+				
+Intelligence artificielle
+embarquée
+Cybersécurité
+intégrée
+Refroidissement passif
+(sans ventilateur)
+Gestion centralisée
+des fonctions véhicule
+Des boîtiers de télématique intelligents au service de la connectivité et du diagnostic
+									Des boîtiers de télématique intelligents, adaptés aux environnements extrêmes, assurent une gestion optimisée des flottes et un diagnostic à distance en temps réel.
+Les boîtiers de télématique d’ACTIA, conçus pour une connectivité optimale et un diagnostic à distance, sont intégrés directement dans le processus de fabrication, assurant ainsi un contrôle qualité strict et une parfaite adéquation avec les besoins des constructeurs. Cette approche verticale permet à ACTIA de garantir des produits robustes, sécurisés et innovants, adaptés aux exigences des véhicules industriels modernes et des environnements de travail les plus exigeants.
+				
+Les boîtiers de télématique d’ACTIA, conçus pour une connectivité optimale et un diagnostic à distance, sont intégrés directement dans le processus de fabrication, assurant ainsi un contrôle qualité strict et une parfaite adéquation avec les besoins des constructeurs. Cette approche verticale permet à ACTIA de garantir des produits robustes, sécurisés et innovants, adaptés aux exigences des véhicules industriels modernes et des environnements de travail les plus exigeants.
+Services connectés : un écosystème complet pour digitaliser les machines hors-route
+									ACTIA, à travers ses solutions de télématique avancée, joue un rôle clé dans la digitalisation des véhicules industriels en permettant une gestion intelligente des données, l’optimisation des performances et la sécurisation des équipements, tout en offrant des services évolutifs et adaptés aux défis technologiques et réglementaires.
+ACTIA propose ainsi un écosystème digital complet, offrant aux constructeurs une approche intégrée et sécurisée pour maximiser l’efficacité, la productivité et la rentabilité de leurs machines industrielles.
+Depuis la production jusqu’à l’exploitation terrain, en passant par la maintenance et l’analyse des performances
+				
+ACTIA propose ainsi un écosystème digital complet, offrant aux constructeurs une approche intégrée et sécurisée pour maximiser l’efficacité, la productivité et la rentabilité de leurs machines industrielles.
+Depuis la production jusqu’à l’exploitation terrain, en passant par la maintenance et l’analyse des performances
+Production :
+									Solutions de validation et d’inspection en fin de ligne, assurant un contrôle qualité précis dès la fabrication.								
+				
+Ingénierie & test terrain :
+									Plateforme centralisée pour les OEMs avec accès aux données en temps réel, diagnostic analytique, jumeau numérique (Digital Twin) et analyse de performances.								
+				
+Exploitation & services connectés :
+									Fonctionnalités télématiques avancées et interopérabilité avec les plateformes tierces pour optimiser la gestion des engins sur le terrain.								
+				
+Mise à jour & optimisation des performances :
+									Flashage des calculateurs à distance, intégration des dernières mises à jour logicielles et fonctionnalités avancées pour garantir l’évolution continue des équipements.								
+				
+Maintenance & diagnostic :
+									Solutions de diagnostic et télédiagnostic dédiés aux constructeurs (OEM), assurant un suivi précis de l’état des machines et facilitant la maintenance préventive.								
+				
+Un écosystème connecté, pensé pour chaque étape du cycle de vie de vos machines.
+									De la fabrication à l’exploitation terrain, en passant par la maintenance à distance, découvrez comment ACTIA vous accompagne pour maximiser la performance et la disponibilité de vos équipements industriels.								
+				
+Télématique avancée pour la digitalisation des flottes industrielles
+									ACTIA, pionnier dans le diagnostic embarqué et la gestion des données, propose des solutions de télématique avancée permettant aux flottes de suivre à distance la performance des véhicules, d’optimiser la maintenance et de développer de nouveaux services basés sur les données. Grâce à des technologies de diagnostic embarqué et de maintenance prédictive, ACTIA améliore l’efficacité des véhicules, réduit les temps d’arrêt et augmente la rentabilité. Les mises à jour logicielles à distance (OTA), la cybersécurité renforcée et la compatibilité continue avec les évolutions réglementaires (EU 2022/2555, REDII, etc.) garantissent la pérennité et l’adaptabilité de ses solutions.
+ACTIA assure ainsi la digitalisation, l’optimisation et la sécurisation des véhicules industriels, tout en répondant aux défis technologiques et réglementaires.
+				
+ACTIA assure ainsi la digitalisation, l’optimisation et la sécurisation des véhicules industriels, tout en répondant aux défis technologiques et réglementaires.
+ACTIAFleet Agriculture : Optimisez la gestion de votre flotte agricole
+									ACTIAFleet Agriculture est un portail télématique de gestion de flotte spécialement conçu pour le secteur agricole. Il permet de suivre en temps réel les véhicules, d’analyser les données collectées pour optimiser les coûts d’exploitation et d’assurer le diagnostic ainsi que la maintenance à distance. Cette solution permet aux exploitants agricoles de maximiser la productivité tout en garantissant une gestion efficace et une réduction des coûts liés à l’entretien des équipements.								
+				
+Digitalisez la gestion de vos flottes industrielles avec ACTIA.
+									Suivi en temps réel, diagnostic à distance, maintenance prédictive et conformité réglementaire : tout est pensé pour améliorer votre performance terrain.								
+				
+Optimisation du diagnostic après-vente : efficacité, mobilité et anticipation des pannes
+									Les solutions de diagnostic après-vente doivent également contribuer à préserver le taux de service des véhicules. En cas de panne les véhicules doivent rester immobilisés le moins longtemps possible. Et la tâche se complique quand l’engin n’est pas en capacité à se déplacer en atelier.
+Cela signifie que les solutions de diagnostic après-vente doivent impérativement être efficaces, faciles d’utilisation, mobiles, et les plus complètes possibles. Par exemple les solutions de diagnostic doivent intégrer la technologie FOTA ou  “Firmware Over-The-Air” que l’on peut traduire littéralement par “firmware par liaison radio”. Cette technologie permet de télécharger en arrière-plan les mises à jour logicielles des calculateurs électroniques (ECU) embarqués. Elle ne requiert aucune démarche spécifique de l’utilisateur, exception faite d’une demande d’autorisation d’installation ou d’un redémarrage de l’appareil en question.
+Grâce à ces avancées, les constructeurs ne sont plus de simples fournisseurs d’équipements, mais deviennent de véritables partenaires stratégiques, proposant des solutions globales pour maximiser la performance des machines et la satisfaction des clients.
+				
+Grâce à ces avancées, les constructeurs ne sont plus de simples fournisseurs d’équipements, mais deviennent de véritables partenaires stratégiques, proposant des solutions globales pour maximiser la performance des machines et la satisfaction des clients.
+Le kit Diag Agri
+									ACTIA propose le Kit Diag Agri, une solution de diagnostic rapide conçue pour limiter les temps d’arrêt des machines agricoles. Elle intègre une VCI multiprotocole et une plateforme logicielle dédiée, utilisée notamment par KOHLER et ARGOTractors.								
+				
+Réduisez les temps d’arrêt et anticipez les pannes avec nos solutions de diagnostic mobile.
+									Le Kit Diag Agri d’ACTIA est conçu pour les conditions exigeantes du terrain et la simplicité d’utilisation, avec des technologies comme le FOTA intégrées.								
+				
+Digital Cabin d’ACTIA : instrumentation intelligente pour engins spéciaux
+									ACTIA propose une gamme complète de solutions d’instrumentation embarquée pour les engins agricoles, de chantier et off-highway. Pensées pour les environnements exigeants, nos clusters assurent une gestion fiable des fonctions véhicule et une interface utilisateur claire, tandis que nos displays déportés offrent une visualisation avancée et centralisée des données. Ces composants sont les piliers de notre approche Digital Cabin : une cabine connectée, ergonomique et évolutive, conçue pour renforcer la sécurité, la productivité et le confort de l’opérateur.
+Grâce à une architecture modulaire, à la compatibilité avec les dernières technologies (connectivité, diagnostic, FOTA) et à des interfaces personnalisables, ACTIA vous accompagne dans la transformation digitale de vos cabines et de vos machines.
+				
+Grâce à une architecture modulaire, à la compatibilité avec les dernières technologies (connectivité, diagnostic, FOTA) et à des interfaces personnalisables, ACTIA vous accompagne dans la transformation digitale de vos cabines et de vos machines.
+Découvrez nos solutions en action
+									De l’agriculture à la construction, ACTIA déploie ses technologies sur le terrain pour accompagner les constructeurs dans la digitalisation et la performance de leurs véhicules.								
+				
+Découvrez nos solutions en action de l’agriculture à la construction.
+
+Notre histoire
+et nos valeurs
+				
+L’histoire d’un groupe industriel international
+									ACTIA est créée en 1986 par Messieurs CALMELS, CHABRERIE et PECH à l’occasion du « spin-off » du département « petite série » de BENDIX à Toulouse (France). Les familles PECH et CALMELS sont toujours actionnaires majoritaires du Groupe qui garde ainsi son identité familiale et son indépendance.
+Dés sa création, ACTIA se développe suivant une orientation stratégique qui va construire au fil des années un Groupe industriel et international.
+Ainsi en 1988, l’acquisition du site industriel Alcyon dimensionne une première unité de production électronique. Ce site français implanté à Colomiers (proche Toulouse – France) sera complété en 1997 et en 2008 d’unités implantées à Tunis (Tunisie), puis en 2018 d’une unité basée à Détroit (États-Unis). Deux autres sites, l’un en Suède et, plus récemment en Espagne, viennent compléter cet outil industriel de pointe.
+En 1991 démarre l’internationalisation d’ACTIA qui, au rythme d’une acquisition ou d’une création d’entreprise par an, se développe sur tous les continents et dans de nombreux pays : le Royaume-Uni, l’Espagne, l’Italie, le Mexique, l’Allemagne, les États-Unis, le Brésil, l’Italie, la Pologne, l’Inde, la Chine, la Tunisie, la Suède, la Belgique, le Japon, l’Égypte et, plus récemment, le Canada.
+				
+Dés sa création, ACTIA se développe suivant une orientation stratégique qui va construire au fil des années un Groupe industriel et international.
+Ainsi en 1988, l’acquisition du site industriel Alcyon dimensionne une première unité de production électronique. Ce site français implanté à Colomiers (proche Toulouse – France) sera complété en 1997 et en 2008 d’unités implantées à Tunis (Tunisie), puis en 2018 d’une unité basée à Détroit (États-Unis). Deux autres sites, l’un en Suède et, plus récemment en Espagne, viennent compléter cet outil industriel de pointe.
+En 1991 démarre l’internationalisation d’ACTIA qui, au rythme d’une acquisition ou d’une création d’entreprise par an, se développe sur tous les continents et dans de nombreux pays : le Royaume-Uni, l’Espagne, l’Italie, le Mexique, l’Allemagne, les États-Unis, le Brésil, l’Italie, la Pologne, l’Inde, la Chine, la Tunisie, la Suède, la Belgique, le Japon, l’Égypte et, plus récemment, le Canada.
+Le mot du président
+									“Depuis sa création, ACTIA conçoit et fabrique une électronique de pointe pour les secteurs particulièrement exigeants de la mobilité, de l’aéronautique, du spatial ou de l’énergie. Portées par l’ambition d’un monde plus durable, nos solutions adressent les grands enjeux de ces différents secteurs : la connectivité, la sécurité ou la transition énergétique.
+Si notre excellence technologique et industrielle sont les deux leviers indissociables de notre dynamique d’entreprise, le développement de notre Groupe se fonde avant tout sur ce que nous sommes : une Entreprise de Taille Intermédiaire, familiale, indépendante et industrielle.
+ACTIA est une entreprise ouverte au monde, une entreprise rare, profondément humaine, engagée au service de ses clients et animée par la volonté de poursuivre une très belle aventure collective débutée il y a près de 40 ans.”
+				
+Si notre excellence technologique et industrielle sont les deux leviers indissociables de notre dynamique d’entreprise, le développement de notre Groupe se fonde avant tout sur ce que nous sommes : une Entreprise de Taille Intermédiaire, familiale, indépendante et industrielle.
+ACTIA est une entreprise ouverte au monde, une entreprise rare, profondément humaine, engagée au service de ses clients et animée par la volonté de poursuivre une très belle aventure collective débutée il y a près de 40 ans.”
+Jean-Louis PECH, Président du conseil d'administration et administrateur, ACTIA Group
+L’identité d’ACTIA : une ETI familiale, ancrée sur ses territoires
+									ACTIA est une Entreprise de Taille Intermédiaire (ETI) familiale. C’est sa force et sa singularité dans un environnement métier de très grandes entreprises.
+Le Groupe ACTIA réunit les spécificités d’une ETI . C’est une entreprise à la fois internationale et fortement ancrée sur ses territoires, avec la recherche d’un impact positif sur son écosystème . Avec ses équipes, ACTIA porte ainsi la fierté de cette dimension multilocale .
+L’indépendance d’entreprendre permet de conjuguer le goût du challenge avec un projet d’entreprise inscrit dans le temps et dans la recherche d’une performance et d’un développement durable . Animée de cette force constructive, c’est dans l’excellence et l’agilité qu’ACTIA collabore avec ses différentes parties prenantes .
+Dans un environnement fortement compétitif et en constante évolution, ACTIA mobilise ses forces pour innover . Son organisation de taille intermédiaire permet une grande réactivité et un état d’esprit centré sur l’humain .
+				
+Le Groupe ACTIA réunit les spécificités d’une ETI . C’est une entreprise à la fois internationale et fortement ancrée sur ses territoires, avec la recherche d’un impact positif sur son écosystème . Avec ses équipes, ACTIA porte ainsi la fierté de cette dimension multilocale .
+L’indépendance d’entreprendre permet de conjuguer le goût du challenge avec un projet d’entreprise inscrit dans le temps et dans la recherche d’une performance et d’un développement durable . Animée de cette force constructive, c’est dans l’excellence et l’agilité qu’ACTIA collabore avec ses différentes parties prenantes .
+Dans un environnement fortement compétitif et en constante évolution, ACTIA mobilise ses forces pour innover . Son organisation de taille intermédiaire permet une grande réactivité et un état d’esprit centré sur l’humain .

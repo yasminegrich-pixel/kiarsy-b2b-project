@@ -716,114 +716,45 @@ with tab3:
 # ==========================================================
 with tab4:
     st.title("⚙️ Admin Portal")
-    admin_tab1, admin_tab2 = st.tabs(["➕ Add / Scrape Company", "🗑️ Manage / Delete Companies"])
+    admin_tab1, admin_tab2 = st.tabs(["🚀 Add Company (Automatic)", "🗑️ Manage / Delete Companies"])
 
+    # =========================================================
+    # TAB 1 — FULLY AUTOMATIC ADD
+    # =========================================================
     with admin_tab1:
-        st.subheader("Add New Company")
-        with st.form("add_company_form"):
-            c_name = st.text_input("Company Name")
-            c_ind = st.text_input("Industry")
-            c_reg = st.text_input("Region / Country")
-            c_url = st.text_input("Website URL (e.g., https://company.com)")
-            submitted = st.form_submit_button("1. Scrape Website Text")
+        st.subheader("Add New Company Automatically")
+        st.markdown("Enter the company name and website. The system will scrape, detect values, score dimensions and rank symbols automatically.")
 
-        if submitted and c_url:
-            import requests
-            from bs4 import BeautifulSoup
-            from urllib.parse import urlparse, urljoin
+        with st.form("auto_add_company_form"):
+            c_name = st.text_input("Company Name *", placeholder="e.g. WWF Tunisia")
+            c_url = st.text_input("Website URL *", placeholder="https://www.example.com")
+            c_ind = st.text_input("Industry (optional)")
+            c_reg = st.text_input("Region / Country (optional)")
 
-            def scrape_site(url, timeout=15):
-                HEADERS = {"User-Agent": "Mozilla/5.0 (Kiarsy Cultural Affinity Engine)"}
-                def clean(soup):
-                    for tag in soup(["script", "style", "nav", "footer", "header", "aside", "form"]):
-                        tag.decompose()
-                    return " ".join(soup.get_text(separator=" ", strip=True).split())
-                def try_fetch(u):
-                    try:
-                        r = requests.get(u, headers=HEADERS, timeout=timeout, allow_redirects=True)
-                        if r.status_code == 200:
-                            return r.text
-                    except Exception:
-                        pass
-                    return None
-                html_txt = try_fetch(url)
-                if html_txt:
-                    c_soup = BeautifulSoup(html_txt, "html.parser")
-                    c_text = clean(c_soup)
-                    links = c_soup.find_all("a", href=True)
-                    targets = set()
-                    keywords = ["a-propos", "qui-sommes-nous", "rse", "csr", "engagement", "valeurs", "about", "mission"]
-                    for link in links:
-                        href = link["href"].lower()
-                        if any(k in href for k in keywords):
-                            targets.add(urljoin(url, link["href"]))
-                    for deep in list(targets)[:2]:
-                        sub = try_fetch(deep)
-                        if sub:
-                            c_text += "\n\n" + clean(BeautifulSoup(sub, "html.parser"))
-                    return c_text, url
-                return None, None
+            submitted = st.form_submit_button("🚀 Process Company Automatically", type="primary")
 
-            with st.spinner("Scraping website..."):
-                text_res, used_url = scrape_site(c_url)
-            if text_res:
-                st.session_state["scraped_text"] = text_res
-                st.session_state["form_name"] = c_name
-                st.session_state["form_ind"] = c_ind
-                st.session_state["form_reg"] = c_reg
-                st.rerun()
+        if submitted:
+            if not c_name or not c_url:
+                st.error("Please fill in at least the Company Name and Website URL.")
             else:
-                st.error("❌ Could not connect to this URL.")
-                st.session_state["scraped_text"] = ""
-
-        if st.session_state.get("scraped_text"):
-            st.markdown("---")
-            st.subheader("2. Review Text & Assign Values")
-            if len(st.session_state["scraped_text"]) < 1000:
-                st.warning("⚠️ This site loads content via JavaScript; only surface text was captured. Paste fuller text below if needed.")
-            edited_text = st.text_area("Scraped / pasted text", value=st.session_state["scraped_text"], height=220)
-
-            cur.execute("SELECT value_id, value_name FROM universal_values ORDER BY value_id")
-            uvs = cur.fetchall()
-            tiers = ["Explicit", "Strongly Supported", "Possible"]
-            value_assignments = []
-            for v in uvs:
-                cols = st.columns([0.5, 2.5, 2, 4])
-                with cols[0]:
-                    checked = st.checkbox("Use", key=f"chk_{v['value_id']}")
-                with cols[1]:
-                    st.markdown(f"**{v['value_name']}**")
-                with cols[2]:
-                    tier = st.selectbox("Tier", tiers, key=f"tier_{v['value_id']}", disabled=not checked)
-                with cols[3]:
-                    quote = st.text_input("Evidence quote", key=f"quote_{v['value_id']}", disabled=not checked)
-                if checked:
-                    value_assignments.append((v["value_id"], tier, quote))
-
-            if st.button("3. Save Company to Database", type="primary"):
-                if not st.session_state.get("form_name"):
-                    st.error("Company name missing.")
-                elif not edited_text:
-                    st.error("Text is empty.")
-                else:
+                with st.spinner("Processing company... This can take 1–3 minutes. Please wait."):
                     try:
-                        c_id = f"CO-{uuid.uuid4().hex[:4].upper()}"
-                        cur.execute("""INSERT INTO companies (company_id, company_name, industry, country_region, company_summary)
-                                       VALUES (%s,%s,%s,%s,%s)""",
-                                    (c_id, st.session_state["form_name"], st.session_state.get("form_ind"),
-                                     st.session_state.get("form_reg"), edited_text))
-                        for vid, tier, quote in value_assignments:
-                            cur.execute("""INSERT INTO company_values (company_id, value_id, tier, evidence_summary)
-                                           VALUES (%s,%s,%s,%s)""", (c_id, vid, tier, quote))
-                        conn.commit()
-                        st.success(f"✅ Saved {st.session_state['form_name']}. Now run the auto-pipeline to score it:")
-                        st.code(f'python scripts/auto_pipeline.py "{st.session_state["form_name"]}" "<url>"')
-                        for k in ["scraped_text", "form_name", "form_ind", "form_reg"]:
-                            st.session_state.pop(k, None)
-                    except Exception as e:
-                        conn.rollback()
-                        st.error(f"Database error: {e}")
+                        from scripts.auto_pipeline import main as process_company
+                        process_company(c_name, c_url, c_ind or "", c_reg or "")
 
+                        st.success(f"✅ **{c_name}** has been processed successfully!")
+                        st.balloons()
+                        st.info("Go to the sidebar and select the company to see the results.")
+                        st.rerun()
+
+                    except Exception as e:
+                        st.error("An error occurred while processing the company:")
+                        st.code(str(e))
+                        st.warning("You can also try running it from the terminal if needed.")
+
+    # =========================================================
+    # TAB 2 — DELETE (kept exactly as you had it)
+    # =========================================================
     with admin_tab2:
         st.subheader("Manage / Delete Companies")
         st.warning("⚠️ Deleting a company permanently removes its values, scores, and symbol matches.")
