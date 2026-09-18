@@ -1,0 +1,14 @@
+id: snake-clan
+name: "Snake (Hopi clan / ceremonial)"
+culture: amerindienne
+meaning: >
+  The snake represents Hopi clan identity and ceremonial traditions; it is linked to specific clan and ritual contexts rather than a generic ‘wisdom’ meaning.
+values:
+  - "Heritage, Craftsmanship & Legacy"
+  - "Leadership, Governance & Authority"
+sources:
+  - "National Museum of the American Indian – Hopi Snake Clan documentation"
+design_notes: "Clan and ceremonial identity."
+popularity: medium
+usage: restricted
+usage_note: "Do not reduce Hopi snake imagery to generic ‘wisdom’ or ‘danger’."

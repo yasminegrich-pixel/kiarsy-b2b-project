@@ -1,0 +1,15 @@
+id: handprint
+name: "Handprint"
+culture: amerindienne
+meaning: >
+  A handprint represents human presence, identity, and participation in the landscape (especially in Ancestral Puebloan and Southwest rock-art traditions).
+values:
+  - "Heritage, Craftsmanship & Legacy"
+  - "Diversity, Inclusion & Minority Rights"
+sources:
+  - "National Park Service – Hands Over Time"
+  - "Piedras Marcadas documentation"
+design_notes: "Presence and identity motif in rock art."
+popularity: medium
+usage: open
+usage_note: "Do not assign a single meaning such as healing or protection without a culture- and site-specific source."

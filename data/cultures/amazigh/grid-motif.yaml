@@ -1,0 +1,14 @@
+id: grid-motif
+name: "Grid / quadrilled motif"
+culture: amazigh
+meaning: >
+  The grid motif represents order and geometric decorative expression in North African pottery traditions.
+values:
+  - "Heritage, Craftsmanship & Legacy"
+  - "Leadership, Governance & Authority"
+sources:
+  - "Encyclopédie berbère – Ghar Cahal"
+design_notes: "Order and structure through geometry."
+popularity: low
+usage: open
+usage_note: "Do not assign agricultural, net, or protection meanings without a local source."

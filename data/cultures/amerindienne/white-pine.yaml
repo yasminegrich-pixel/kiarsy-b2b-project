@@ -1,0 +1,15 @@
+id: white-pine
+name: "White Pine"
+culture: amerindienne
+meaning: >
+  The White Pine is the Tree of Peace in Haudenosaunee tradition, representing law, peace, and the unity of the nations.
+values:
+  - "Justice, Human Rights & Transparency"
+  - "Collaboration, Partnerships & Ecosystems"
+sources:
+  - "Oneida Nation symbolism"
+  - "Haudenosaunee Confederacy"
+design_notes: "Living emblem of peace and law."
+popularity: high
+usage: open
+usage_note: "Keep the Haudenosaunee / Oneida attribution rather than treating it as a generic tree symbol."

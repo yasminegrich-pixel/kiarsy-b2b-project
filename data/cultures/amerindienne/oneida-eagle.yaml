@@ -1,0 +1,15 @@
+id: oneida-eagle
+name: "Eagle (Oneida / Haudenosaunee)"
+culture: amerindienne
+meaning: >
+  The eagle represents strength, watchfulness, protection, and the ability to see danger from afar; it is linked to the Tree of Peace in Oneida and Haudenosaunee symbolism.
+values:
+  - "Leadership, Governance & Authority"
+  - "Trust, Security & Risk Management"
+sources:
+  - "Oneida Nation – Symbolism"
+  - "Haudenosaunee Confederacy"
+design_notes: "Watchfulness and protection above the Tree of Peace."
+popularity: high
+usage: open
+usage_note: "Use Oneida/Haudenosaunee attribution rather than a generic ‘Native American eagle’."

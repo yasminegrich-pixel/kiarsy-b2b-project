@@ -1,0 +1,14 @@
+id: drum
+name: "Drum"
+culture: amerindienne
+meaning: >
+  The drum represents ceremony, community, song, dance, gathering, and spiritual connection across many Indigenous nations.
+values:
+  - "Care, Health & Community Nurturing"
+  - "Heritage, Craftsmanship & Legacy"
+sources:
+  - "National Museum of the American Indian collections"
+design_notes: "Central ceremonial and community object."
+popularity: high
+usage: open
+usage_note: "Do not use a generic drum graphic to imply one specific nation’s ceremony."

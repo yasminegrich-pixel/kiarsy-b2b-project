@@ -1,0 +1,15 @@
+id: sun
+name: "Sun (Hopi / Pueblo)"
+culture: amerindienne
+meaning: >
+  The sun represents life, light, warmth, and the cycles of the natural and ceremonial world in Hopi and related Pueblo traditions.
+values:
+  - "Environmental Sustainability & Climate Action"
+  - "Transformation, Renewal & Change Management"
+sources:
+  - "National Museum of the American Indian"
+  - "National Park Service archeoastronomy documentation"
+design_notes: "Life and cyclical renewal."
+popularity: high
+usage: open
+usage_note: "Avoid assigning the Zia Sun’s fourfold meaning to all Hopi or Pueblo sun imagery."

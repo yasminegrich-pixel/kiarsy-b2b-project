@@ -1,0 +1,15 @@
+id: turtle-island
+name: "Turtle Island (conceptual)"
+culture: amerindienne
+meaning: >
+  Turtle Island is a name used by many Indigenous peoples (especially in the Northeast) for the North American continent, rooted in creation stories involving the turtle.
+values:
+  - "Heritage, Craftsmanship & Legacy"
+  - "Environmental Sustainability & Climate Action"
+sources:
+  - "Haudenosaunee and Anishinaabe creation traditions"
+  - "Oneida Nation and related community sources"
+design_notes: "Land, creation, and continuity concept."
+popularity: high
+usage: open
+usage_note: "Do not present Turtle Island as a single belief shared identically by every Indigenous nation."

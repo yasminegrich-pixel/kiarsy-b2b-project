@@ -1,0 +1,15 @@
+id: corn
+name: "Corn / maize"
+culture: amerindienne
+meaning: >
+  Corn represents nourishment, life, agriculture, and community sustenance (especially in Haudenosaunee and other Eastern Woodlands traditions).
+values:
+  - "Care, Health & Community Nurturing"
+  - "Economic Growth & Abundance"
+sources:
+  - "Onondaga Nation – Food"
+  - "USDA Three Sisters documentation"
+design_notes: "Central food and life symbol."
+popularity: high
+usage: open
+usage_note: "Do not assign one universal corn meaning to all Indigenous cultures."

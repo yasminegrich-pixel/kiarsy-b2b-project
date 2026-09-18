@@ -1,0 +1,15 @@
+id: bean
+name: "Bean"
+culture: amerindienne
+meaning: >
+  Bean represents nourishment, cooperation, and reciprocity within the Three Sisters agricultural system.
+values:
+  - "Collaboration, Partnerships & Ecosystems"
+  - "Care, Health & Community Nurturing"
+sources:
+  - "New York State Museum – Three Sisters"
+  - "Onondaga Nation"
+design_notes: "Part of the Three Sisters interdependence system."
+popularity: medium
+usage: open
+usage_note: "Avoid inventing a standalone symbolic meaning for beans outside the Three Sisters context."

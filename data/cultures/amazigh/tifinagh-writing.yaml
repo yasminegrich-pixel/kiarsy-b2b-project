@@ -1,0 +1,15 @@
+id: tifinagh-writing
+name: "Libyco-Berber / Tifinagh writing"
+culture: amazigh
+meaning: >
+  Libyco-Berber and Tifinagh writing represent the Amazigh language and cultural continuity, carried through one of the oldest alphabets still in use.
+values:
+  - "Heritage, Craftsmanship & Legacy"
+  - "Diversity, Inclusion & Minority Rights"
+sources:
+  - "Encyclopédie berbère – Libyque: écriture et langue"
+  - "Institut Royal de la Culture Amazighe (IRCAM)"
+design_notes: "Writing system as living cultural continuity."
+popularity: high
+usage: open
+usage_note: "Treat ancient Libyco-Berber, Tuareg Tifinagh, and modern Neo-Tifinagh as related but not identical systems."

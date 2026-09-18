@@ -1,0 +1,14 @@
+id: bear
+name: "Bear"
+culture: amerindienne
+meaning: >
+  The bear represents strength, power, and an important animal presence in several Indigenous traditions (including Cherokee and others).
+values:
+  - "Resilience, Endurance & Crisis Survival"
+  - "Leadership, Governance & Authority"
+sources:
+  - "National Museum of the American Indian object records"
+design_notes: "Strength and power animal."
+popularity: medium
+usage: open
+usage_note: "Do not import meanings from one nation into another. Bear symbolism varies by community."

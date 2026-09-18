@@ -1,0 +1,14 @@
+id: skunk
+name: "Skunk"
+culture: amerindienne
+meaning: >
+  The skunk appears in Pueblo visual art and can be associated with protection and self-defense (documented in San Ildefonso Pueblo painting contexts).
+values:
+  - "Trust, Security & Risk Management"
+  - "Resilience, Endurance & Crisis Survival"
+sources:
+  - "National Museum of the American Indian – Awa Tsireh painting"
+design_notes: "Protective animal motif."
+popularity: low
+usage: open
+usage_note: "Do not invent a broad symbolic meaning from the animal’s presence alone."

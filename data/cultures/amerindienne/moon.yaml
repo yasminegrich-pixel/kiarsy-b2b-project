@@ -1,0 +1,14 @@
+id: moon
+name: "Moon"
+culture: amerindienne
+meaning: >
+  The moon represents cycles, time, night, and the rhythms of the natural world across several Indigenous traditions.
+values:
+  - "Transformation, Renewal & Change Management"
+  - "Heritage, Craftsmanship & Legacy"
+sources:
+  - "National Park Service – Archeoastronomy in Stone"
+design_notes: "Cyclical time and natural rhythms."
+popularity: medium
+usage: open
+usage_note: "Do not assign a universal lunar meaning across all nations."

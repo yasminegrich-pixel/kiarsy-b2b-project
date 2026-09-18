@@ -1,0 +1,14 @@
+id: kabyle-cross
+name: "Cross motif in Kabyle pottery"
+culture: amazigh
+meaning: >
+  The cross motif in Kabyle pottery represents protection, the four cardinal directions, and fertility.
+values:
+  - "Trust, Security & Risk Management"
+  - "Care, Health & Community Nurturing"
+sources:
+  - "The Metropolitan Museum of Art – Kabyle Platter"
+design_notes: "Directional and protective geometry."
+popularity: medium
+usage: open
+usage_note: "Avoid assuming Christian meaning or assigning a generic Amazigh meaning to all crosses."
