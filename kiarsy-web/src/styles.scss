@@ -1,0 +1,60 @@
+:root {
+  --bg: #faf7f5;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
+  --brand: #e11d48;
+  --brand-2: #f97316;
+  --brand-soft: #fff1f2;
+  --ok: #166534;
+  --ok-bg: #dcfce7;
+  --warn-bg: #fff7ed;
+  --shadow: 0 8px 24px rgba(28, 25, 23, 0.06);
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(249, 115, 22, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(225, 29, 72, 0.06), transparent 24%),
+    var(--bg);
+}
+
+.page h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 0;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  transition: 0.15s ease;
+  font-weight: 500;
+}
+
+.chip:hover {
+  border-color: #fda4af;
+  background: var(--brand-soft);
+}
+
+.chip.active {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.25);
+}

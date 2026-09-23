@@ -1,0 +1,27 @@
+<div class="app-shell">
+  <aside class="sidebar">
+        <div class="brand">
+      <img src="logo_emblem.png" alt="Kiarsy" class="brand-logo" />
+      <div>
+        <h1>Kiarsy</h1>
+        <p>Cultural Affinity Engine</p>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a routerLink="/dna" routerLinkActive="active">Company DNA</a>
+      <a routerLink="/matches" routerLinkActive="active">Symbol Matches</a>
+      <a routerLink="/extrait" routerLinkActive="active">Client Extrait</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      Streamlit kept as backup
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

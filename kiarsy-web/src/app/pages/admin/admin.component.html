@@ -1,0 +1,122 @@
+<section class="page">
+  <h2>Admin</h2>
+  <p class="muted">Process companies automatically, and manage cultures & symbols in PostgreSQL.</p>
+
+  <div class="ok" *ngIf="message">{{ message }}</div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <!-- ===================== COMPANY ===================== -->
+  <div class="card">
+    <h3>Process company (scrape + values + symbols)</h3>
+    <p class="hint">This can take 1–3 minutes. Keep the API running.</p>
+    <div class="form-grid">
+      <label>Company name
+        <input [(ngModel)]="companyForm.company_name" placeholder="WWF Tunisia" />
+      </label>
+      <label>Website URL
+        <input [(ngModel)]="companyForm.website_url" placeholder="https://www.wwf.tn/" />
+      </label>
+      <label>Industry (optional)
+        <input [(ngModel)]="companyForm.industry" />
+      </label>
+      <label>Region (optional)
+        <input [(ngModel)]="companyForm.region" />
+      </label>
+    </div>
+    <button class="btn" [disabled]="processing" (click)="processCompany()">
+      {{ processing ? 'Processing… please wait' : 'Process company automatically' }}
+    </button>
+
+    <h4 class="sub">Delete company</h4>
+    <select [(ngModel)]="deleteId">
+      <option value="">Select company</option>
+      <option *ngFor="let c of companies" [value]="c.company_id">{{ c.company_name }}</option>
+    </select>
+    <button class="btn danger-btn" (click)="removeCompany()">Delete company</button>
+  </div>
+
+  <!-- ===================== CULTURE ===================== -->
+  <div class="card">
+    <h3>Add culture</h3>
+    <div class="form-grid">
+      <label>Culture ID
+        <input [(ngModel)]="newCultureId" placeholder="japanese" />
+      </label>
+      <label>Culture name
+        <input [(ngModel)]="newCultureName" placeholder="Japanese" />
+      </label>
+    </div>
+    <button class="btn" (click)="createCulture()">Add culture</button>
+
+    <h4 class="sub">Delete culture</h4>
+    <select [(ngModel)]="deleteCultureId">
+      <option value="">Select culture</option>
+      <option *ngFor="let c of cultures" [value]="c.culture_id">{{ c.culture_name }}</option>
+    </select>
+    <button class="btn danger-btn" (click)="removeCulture()">Delete culture</button>
+  </div>
+
+  <!-- ===================== SYMBOL ===================== -->
+  <div class="card">
+    <h3>Add symbol</h3>
+    <div class="form-grid">
+      <label>Symbol ID
+        <input [(ngModel)]="symbol.symbol_id" placeholder="JPN-001" />
+      </label>
+      <label>Symbol name
+        <input [(ngModel)]="symbol.symbol_name" />
+      </label>
+      <label>Culture
+        <select [(ngModel)]="symbol.culture_id">
+          <option value="">Select culture</option>
+          <option *ngFor="let c of cultures" [value]="c.culture_id">
+            {{ c.culture_name }}
+          </option>
+        </select>
+      </label>
+      <label>Verification
+        <select [(ngModel)]="symbol.verification_level">
+          <option value="verified">verified</option>
+          <option value="verified_candidate">verified_candidate</option>
+          <option value="probable_strong">probable_strong</option>
+          <option value="probable">probable</option>
+        </select>
+      </label>
+      <label>Usage
+        <select [(ngModel)]="symbol.usage_status">
+          <option value="open">open</option>
+          <option value="restricted">restricted</option>
+        </select>
+      </label>
+      <label>Source URL
+        <input [(ngModel)]="symbol.source_url" />
+      </label>
+    </div>
+    <label class="full">Documented meaning
+      <textarea rows="4" [(ngModel)]="symbol.documented_meaning"></textarea>
+    </label>
+    <label class="full">Usage note
+      <textarea rows="2" [(ngModel)]="symbol.usage_note"></textarea>
+    </label>
+    <label class="full">Sources
+      <input [(ngModel)]="symbol.sources" />
+    </label>
+    <button class="btn" (click)="createSymbol()">Save symbol</button>
+    <p class="hint">After adding symbols, run: <code>python scripts/scorer.py</code></p>
+
+    <h4 class="sub">Delete symbol</h4>
+    <label>Filter by culture
+      <select [(ngModel)]="filterCultureId" (change)="loadSymbols()">
+        <option value="">All</option>
+        <option *ngFor="let c of cultures" [value]="c.culture_id">{{ c.culture_name }}</option>
+      </select>
+    </label>
+    <select [(ngModel)]="deleteSymbolId">
+      <option value="">Select symbol</option>
+      <option *ngFor="let s of symbols" [value]="s.symbol_id">
+        {{ s.symbol_name }} ({{ s.symbol_id }})
+      </option>
+    </select>
+    <button class="btn danger-btn" (click)="removeSymbol()">Delete symbol</button>
+  </div>
+</section>
