@@ -6,6 +6,107 @@ from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
 import psycopg2.extras
 import os
+from datetime import datetime, timedelta, timezone
+from typing import Optional
+
+from fastapi import Depends
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from pydantic import BaseModel
+
+import secrets
+import string
+import smtplib
+from email.message import EmailMessage
+
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+security = HTTPBearer(auto_error=False)
+
+JWT_SECRET = os.getenv("JWT_SECRET", "dev-insecure-secret-change-me")
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRE_MINUTES", "480"))
+
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    role: str
+    username: str
+
+
+class ProfileUpdateRequest(BaseModel):
+    full_name: Optional[str] = None
+    email: Optional[str] = None
+    username: Optional[str] = None
+
+
+class UserCreateRequest(BaseModel):
+    username: str
+    password: str
+    email: Optional[str] = None
+    full_name: Optional[str] = None
+    role: str = "viewer"
+
+
+class UserUpdateRequest(BaseModel):
+    email: Optional[str] = None
+    full_name: Optional[str] = None
+    role: Optional[str] = None
+    is_active: Optional[bool] = None
+    password: Optional[str] = None
+
+
+class PasswordChangeRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+
+def create_access_token(data: dict, expires_minutes: int = JWT_EXPIRE_MINUTES) -> str:
+    payload = data.copy()
+    payload["exp"] = datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+
+def get_current_user(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
+):
+    if credentials is None or not credentials.credentials:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    token = credentials.credentials
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        username = payload.get("sub")
+        role = payload.get("role")
+        if not username:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        return {"username": username, "role": role}
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+
+def require_admin(user=Depends(get_current_user)):
+    if user.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Admin role required")
+    return user
+
+
+def require_editor_or_admin(user=Depends(get_current_user)):
+    if user.get("role") not in ("admin", "editor"):
+        raise HTTPException(status_code=403, detail="Editor or admin role required")
+    return user
+
 
 app = FastAPI(title="Kiarsy API", version="2.0")
 
@@ -22,10 +123,53 @@ def get_conn():
     return psycopg2.connect(
         dbname=os.getenv("DB_NAME", "kiarsy_affinity"),
         user=os.getenv("DB_USER", "yasso"),
-        password=os.getenv("DB_PASSWORD", ""),
+        password=os.getenv("DB_PASSWORD") or None,
         host=os.getenv("DB_HOST", "localhost"),
         port=os.getenv("DB_PORT", "5432"),
     )
+
+
+def _generate_temp_password(length: int = 12) -> str:
+    alphabet = string.ascii_letters + string.digits
+    return "".join(secrets.choice(alphabet) for _ in range(length))
+
+
+def _send_reset_email(to_email: str, username: str, temp_password: str) -> None:
+    host = os.getenv("SMTP_HOST", "")
+    port = int(os.getenv("SMTP_PORT", "587"))
+    user = os.getenv("SMTP_USER", "")
+    password = os.getenv("SMTP_PASSWORD", "")
+    mail_from = os.getenv("SMTP_FROM", user)
+
+    if not host or not user or not password:
+        raise RuntimeError("SMTP is not configured")
+
+    msg = EmailMessage()
+    msg["Subject"] = "Kiarsy — temporary password"
+    msg["From"] = mail_from
+    msg["To"] = to_email
+    msg.set_content(
+        f"""Hello {username},
+
+A password reset was requested for your Kiarsy account.
+
+Temporary password: {temp_password}
+
+1) Log in with this temporary password
+2) Ask an admin to help you set a new permanent password if needed
+
+If you did not request this, contact your Kiarsy administrator.
+
+— Kiarsy
+"""
+    )
+
+    with smtplib.SMTP(host, port, timeout=30) as server:
+        server.starttls()
+        server.login(user, password)
+        server.send_message(msg)
+
+
 
 
 @app.get("/")
@@ -145,7 +289,7 @@ def list_cultures():
 
 
 @app.post("/cultures")
-def add_culture(payload: dict):
+def add_culture(payload: dict, user=Depends(require_editor_or_admin)):
     culture_id = (payload.get("culture_id") or "").strip().lower().replace(" ", "_")
     culture_name = (payload.get("culture_name") or "").strip()
     if not culture_id or not culture_name:
@@ -166,7 +310,7 @@ def add_culture(payload: dict):
 
 
 @app.post("/symbols")
-def add_symbol(payload: dict):
+def add_symbol(payload: dict, user=Depends(require_editor_or_admin)):
     required = ["symbol_id", "symbol_name", "culture_id", "documented_meaning"]
     for k in required:
         if not (payload.get(k) or "").strip():
@@ -227,7 +371,7 @@ def add_symbol(payload: dict):
 
 
 @app.delete("/companies/{company_id}")
-def delete_company(company_id: str):
+def delete_company(company_id: str, user=Depends(require_editor_or_admin)):
     conn = get_conn()
     cur = conn.cursor()
     try:
@@ -245,7 +389,7 @@ def delete_company(company_id: str):
 
 
 @app.delete("/symbols/{symbol_id}")
-def delete_symbol(symbol_id: str):
+def delete_symbol(symbol_id: str, user=Depends(require_editor_or_admin)):
     conn = get_conn()
     cur = conn.cursor()
     try:
@@ -263,7 +407,7 @@ def delete_symbol(symbol_id: str):
 
 
 @app.delete("/cultures/{culture_id}")
-def delete_culture(culture_id: str):
+def delete_culture(culture_id: str, user=Depends(require_editor_or_admin)):
     """Deletes culture only if it has no symbols left."""
     conn = get_conn()
     cur = conn.cursor()
@@ -312,8 +456,218 @@ def list_symbols(culture_id: str | None = None):
     return {"count": len(rows), "symbols": rows}
 
 
+@app.post("/auth/login", response_model=TokenResponse)
+def login(body: LoginRequest):
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            """
+            SELECT username, password_hash, role, is_active
+            FROM users
+            WHERE username = %s
+            """,
+            (body.username.strip(),),
+        )
+        user = cur.fetchone()
+        if not user or not user["is_active"]:
+            raise HTTPException(status_code=401, detail="Invalid username or password")
+
+        if not pwd_context.verify(body.password, user["password_hash"]):
+            raise HTTPException(status_code=401, detail="Invalid username or password")
+
+        cur.execute(
+            "UPDATE users SET last_login_at = now() WHERE username = %s",
+            (user["username"],),
+        )
+        conn.commit()
+
+        token = create_access_token(
+            {"sub": user["username"], "role": user["role"]}
+        )
+        return TokenResponse(
+            access_token=token,
+            role=user["role"],
+            username=user["username"],
+        )
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.get("/auth/me")
+def auth_me(user=Depends(get_current_user)):
+    return user
+
+@app.post("/auth/forgot-password")
+def forgot_password(payload: dict):
+    """
+    Always returns a generic message (do not reveal whether the user exists).
+    If the user exists and has an email, generate a temp password and email it.
+    """
+    username = (payload.get("username") or "").strip()
+    generic = {
+        "ok": True,
+        "message": "If this account exists and has an email on file, a temporary password has been sent.",
+    }
+    if not username:
+        return generic
+
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            """
+            SELECT user_id, username, email, is_active
+            FROM users
+            WHERE username = %s
+            """,
+            (username,),
+        )
+        user = cur.fetchone()
+        if not user or not user["is_active"]:
+            return generic
+
+        if not user.get("email"):
+            print(f"[RESET] user={username} has no email on file")
+            return generic
+
+        temp_password = _generate_temp_password()
+        password_hash = pwd_context.hash(temp_password)
+
+        cur.execute(
+            "UPDATE users SET password_hash = %s WHERE user_id = %s",
+            (password_hash, user["user_id"]),
+        )
+        conn.commit()
+
+        try:
+            _send_reset_email(user["email"], user["username"], temp_password)
+            print(f"[RESET] email sent to {user['email']} for user={username}")
+        except Exception as e:
+            # Keep the new password in DB, but log failure for admin
+            print(f"[RESET] email FAILED for user={username}: {e}")
+            print(f"[RESET] temporary_password={temp_password}")
+            return {
+                "ok": True,
+                "message": "Password was reset, but email sending failed. Contact an administrator.",
+            }
+
+        return generic
+    finally:
+        cur.close()
+        conn.close()
+
+@app.get("/auth/profile")
+def get_profile(user=Depends(get_current_user)):
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            """
+            SELECT user_id, username, email, full_name, role, is_active, created_at, last_login_at
+            FROM users
+            WHERE username = %s
+            """,
+            (user["username"],),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise HTTPException(404, "User not found")
+        return row
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.put("/auth/profile")
+def update_profile(body: ProfileUpdateRequest, user=Depends(get_current_user)):
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            "SELECT user_id, username FROM users WHERE username = %s",
+            (user["username"],),
+        )
+        me = cur.fetchone()
+        if not me:
+            raise HTTPException(404, "User not found")
+
+        new_username = (body.username or me["username"]).strip()
+        new_email = (body.email or "").strip() or None
+        new_full_name = (body.full_name or "").strip() or None
+
+        if not new_username:
+            raise HTTPException(400, "Username cannot be empty")
+
+        # username uniqueness
+        cur.execute(
+            "SELECT 1 FROM users WHERE username = %s AND user_id <> %s",
+            (new_username, me["user_id"]),
+        )
+        if cur.fetchone():
+            raise HTTPException(400, "Username already taken")
+
+        cur.execute(
+            """
+            UPDATE users
+            SET username = %s,
+                email = %s,
+                full_name = %s
+            WHERE user_id = %s
+            RETURNING user_id, username, email, full_name, role
+            """,
+            (new_username, new_email, new_full_name, me["user_id"]),
+        )
+        updated = cur.fetchone()
+        conn.commit()
+
+        # If username changed, issue a fresh token
+        token = create_access_token(
+            {"sub": updated["username"], "role": updated["role"]}
+        )
+        return {
+            "user": updated,
+            "access_token": token,
+            "message": "Profile updated",
+        }
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.post("/auth/change-password")
+def change_password(body: PasswordChangeRequest, user=Depends(get_current_user)):
+    if len(body.new_password or "") < 8:
+        raise HTTPException(400, "New password must be at least 8 characters")
+
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            "SELECT user_id, password_hash FROM users WHERE username = %s",
+            (user["username"],),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise HTTPException(404, "User not found")
+
+        if not pwd_context.verify(body.current_password, row["password_hash"]):
+            raise HTTPException(400, "Current password is incorrect")
+
+        cur.execute(
+            "UPDATE users SET password_hash = %s WHERE user_id = %s",
+            (pwd_context.hash(body.new_password), row["user_id"]),
+        )
+        conn.commit()
+        return {"ok": True, "message": "Password changed successfully"}
+    finally:
+        cur.close()
+        conn.close()
+
+
 @app.post("/companies/process")
-def process_company(payload: dict):
+def process_company(payload: dict, user=Depends(require_editor_or_admin)):
     """
     Runs the full automatic pipeline in a subprocess:
     scrape → values → dimensions → symbol matches
@@ -366,6 +720,142 @@ def process_company(payload: dict):
         "log_tail": (result.stdout or "")[-2500:],
         "message": "Company processed. Refresh DNA / Matches pages.",
     }
+
+
+@app.get("/users")
+def list_users(user=Depends(require_admin)):
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            """
+            SELECT user_id, username, email, full_name, role, is_active,
+                   created_at, last_login_at
+            FROM users
+            ORDER BY username
+            """
+        )
+        return {"users": cur.fetchall()}
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.post("/users")
+def create_user(body: UserCreateRequest, user=Depends(require_admin)):
+    username = body.username.strip()
+    role = (body.role or "viewer").strip()
+    if role not in ("admin", "editor", "viewer"):
+        raise HTTPException(400, "role must be admin, editor, or viewer")
+    if len(body.password or "") < 8:
+        raise HTTPException(400, "Password must be at least 8 characters")
+    if not username:
+        raise HTTPException(400, "Username required")
+
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            """
+            INSERT INTO users (username, email, password_hash, full_name, role, is_active)
+            VALUES (%s, %s, %s, %s, %s, true)
+            RETURNING user_id, username, email, full_name, role, is_active
+            """,
+            (
+                username,
+                (body.email or "").strip() or None,
+                pwd_context.hash(body.password),
+                (body.full_name or "").strip() or None,
+                role,
+            ),
+        )
+        row = cur.fetchone()
+        conn.commit()
+        return {"ok": True, "user": row}
+    except Exception as e:
+        conn.rollback()
+        if "unique" in str(e).lower():
+            raise HTTPException(400, "Username or email already exists")
+        raise
+    finally:
+        cur.close()
+        conn.close()
+
+
+@app.put("/users/{user_id}")
+def update_user(user_id: int, body: UserUpdateRequest, user=Depends(require_admin)):
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute("SELECT user_id FROM users WHERE user_id = %s", (user_id,))
+        if not cur.fetchone():
+            raise HTTPException(404, "User not found")
+
+        if body.role is not None and body.role not in ("admin", "editor", "viewer"):
+            raise HTTPException(400, "Invalid role")
+        if body.password is not None and len(body.password) < 8:
+            raise HTTPException(400, "Password must be at least 8 characters")
+
+        fields = []
+        values = []
+        if body.email is not None:
+            fields.append("email = %s")
+            values.append(body.email.strip() or None)
+        if body.full_name is not None:
+            fields.append("full_name = %s")
+            values.append(body.full_name.strip() or None)
+        if body.role is not None:
+            fields.append("role = %s")
+            values.append(body.role)
+        if body.is_active is not None:
+            fields.append("is_active = %s")
+            values.append(body.is_active)
+        if body.password is not None:
+            fields.append("password_hash = %s")
+            values.append(pwd_context.hash(body.password))
+
+        if not fields:
+            raise HTTPException(400, "No changes provided")
+
+        values.append(user_id)
+        cur.execute(
+            f"""
+            UPDATE users SET {', '.join(fields)}
+            WHERE user_id = %s
+            RETURNING user_id, username, email, full_name, role, is_active
+            """,
+            values,
+        )
+        row = cur.fetchone()
+        conn.commit()
+        return {"ok": True, "user": row}
+    finally:
+        cur.close()
+        conn.close()
+
+@app.delete("/users/{user_id}")
+def delete_user(user_id: int, user=Depends(require_admin)):
+    conn = get_conn()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        cur.execute(
+            "SELECT user_id, username FROM users WHERE user_id = %s",
+            (user_id,),
+        )
+        target = cur.fetchone()
+        if not target:
+            raise HTTPException(404, "User not found")
+
+        # Prevent deleting yourself
+        if target["username"] == user.get("username"):
+            raise HTTPException(400, "You cannot delete your own account")
+
+        cur.execute("DELETE FROM users WHERE user_id = %s", (user_id,))
+        conn.commit()
+        return {"ok": True, "deleted": target["username"]}
+    finally:
+        cur.close()
+        conn.close()
 
 
 if __name__ == "__main__":

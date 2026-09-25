@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,15 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'Kiarsy Cultural Affinity Engine';
+
+  constructor(public api: ApiService, private router: Router) {}
+
+  get username(): string {
+    return localStorage.getItem('kiarsy_username') || '';
+  }
+
+  logout() {
+    this.api.logout();
+    this.router.navigateByUrl('/login');
+  }
 }

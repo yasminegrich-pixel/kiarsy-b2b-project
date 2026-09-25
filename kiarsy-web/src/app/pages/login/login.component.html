@@ -1,0 +1,36 @@
+<section class="login-page">
+  <div class="login-card">
+    <img src="logo_emblem.png" alt="Kiarsy" class="logo" />
+    <h1>{{ mode === 'login' ? 'Kiarsy login' : 'Forgot password' }}</h1>
+    <p class="muted">
+      {{ mode === 'login' ? 'For Kiarsy workers only' : 'Enter your username to receive a temporary password by email' }}
+    </p>
+
+    <label>Username
+      <input [(ngModel)]="username" autocomplete="username" />
+    </label>
+
+    <label *ngIf="mode === 'login'">Password
+      <input type="password" [(ngModel)]="password" autocomplete="current-password" />
+    </label>
+
+    <div class="error" *ngIf="error">{{ error }}</div>
+    <div class="info" *ngIf="info">{{ info }}</div>
+
+    <button
+      class="btn"
+      [disabled]="loading"
+      (click)="mode === 'login' ? submitLogin() : submitForgot()"
+    >
+      {{ loading ? 'Please wait…' : (mode === 'login' ? 'Sign in' : 'Send temporary password') }}
+    </button>
+
+    <button
+      type="button"
+      class="link-btn"
+      (click)="mode = mode === 'login' ? 'forgot' : 'login'"
+    >
+      {{ mode === 'login' ? 'Forgot password?' : 'Back to login' }}
+    </button>
+  </div>
+</section>

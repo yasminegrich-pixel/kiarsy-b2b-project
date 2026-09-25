@@ -57,6 +57,52 @@ input, select, textarea {
 .hint { font-size: 0.85rem; color: #78716c; }
 code { background: #f5f5f4; padding: 0.1rem 0.35rem; border-radius: 4px; }
 
+.user-table {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.user-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr 0.8fr;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid #f5f5f4;
+  font-size: 0.9rem;
+}
+
+.user-row.head {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #78716c;
+  border-bottom: 1px solid #e7e5e4;
+}
+
+.user-row .off {
+  color: #b91c1c;
+}
+
+.btn.mini {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .user-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 800px) {
   .form-grid { grid-template-columns: 1fr; }
 }

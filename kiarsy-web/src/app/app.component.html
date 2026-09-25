@@ -1,6 +1,6 @@
 <div class="app-shell">
   <aside class="sidebar">
-        <div class="brand">
+    <div class="brand">
       <img src="logo_emblem.png" alt="Kiarsy" class="brand-logo" />
       <div>
         <h1>Kiarsy</h1>
@@ -13,11 +13,28 @@
       <a routerLink="/matches" routerLinkActive="active">Symbol Matches</a>
       <a routerLink="/extrait" routerLinkActive="active">Client Extrait</a>
       <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/profile" routerLinkActive="active">My profile</a>
     </nav>
 
     <div class="sidebar-footer">
-      <span class="status-dot"></span>
-      Streamlit kept as backup
+      <div class="user-line" *ngIf="api.isLoggedIn()">
+        Signed in as <strong>{{ username }}</strong>
+      </div>
+
+      <button
+        type="button"
+        class="logout-btn"
+        *ngIf="api.isLoggedIn()"
+        (click)="logout()"
+      >
+        Log out
+      </button>
+
+      <div class="status-line">
+        <span class="status-dot"></span>
+        Secure worker access
+      </div>
     </div>
   </aside>
 

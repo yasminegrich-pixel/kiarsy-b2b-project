@@ -26,6 +26,17 @@ export class AdminComponent implements OnInit {
     region: '',
   };
 
+  users: any[] = [];
+  isAdmin = localStorage.getItem('kiarsy_role') === 'admin';
+
+  newUser = {
+    username: '',
+    password: '',
+    email: '',
+    full_name: '',
+    role: 'viewer',
+  };
+
   deleteId = '';
   newCultureId = '';
   newCultureName = '';
@@ -55,6 +66,12 @@ export class AdminComponent implements OnInit {
     this.api.getCompanies().subscribe({ next: (r) => (this.companies = r.companies) });
     this.api.getCultures().subscribe({ next: (r) => (this.cultures = r.cultures) });
     this.loadSymbols();
+    if (this.isAdmin) {
+      this.api.listUsers().subscribe({
+        next: (r) => (this.users = r.users || []),
+        error: () => (this.users = []),
+      });
+    }
   }
 
   loadSymbols() {
@@ -149,4 +166,62 @@ export class AdminComponent implements OnInit {
       error: (e) => (this.error = e.error?.detail || 'Delete failed'),
     });
   }
+
+  createUserAccount() {
+    this.message = '';
+    this.error = '';
+    this.api.createUser(this.newUser).subscribe({
+      next: () => {
+        this.message = 'User created.';
+        this.newUser = {
+          username: '',
+          password: '',
+          email: '',
+          full_name: '',
+          role: 'viewer',
+        };
+        this.reload();
+      },
+      error: (e) => (this.error = e.error?.detail || 'Could not create user'),
+    });
+  }
+
+  setUserRole(u: any, role: string) {
+    this.api.updateUser(u.user_id, { role }).subscribe({
+      next: () => {
+        this.message = `Role updated for ${u.username}`;
+        this.reload();
+      },
+      error: (e) => (this.error = e.error?.detail || 'Role update failed'),
+    });
+  }
+
+  toggleUserActive(u: any) {
+    this.api.updateUser(u.user_id, { is_active: !u.is_active }).subscribe({
+      next: () => {
+        this.message = `${u.username} ${!u.is_active ? 'activated' : 'deactivated'}`;
+        this.reload();
+      },
+      error: (e) => (this.error = e.error?.detail || 'Update failed'),
+    });
+  }
+
+  deleteUserAccount(u: any) {
+    if (u.username === localStorage.getItem('kiarsy_username')) {
+      this.error = 'You cannot delete your own account';
+      return;
+    }
+    if (!confirm(`Permanently delete user "${u.username}"? This cannot be undone.`)) {
+      return;
+    }
+    this.api.deleteUser(u.user_id).subscribe({
+      next: () => {
+        this.message = `User ${u.username} deleted.`;
+        this.reload();
+      },
+      error: (e) => (this.error = e.error?.detail || 'Delete failed'),
+    });
+  }
+
 }
+

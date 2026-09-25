@@ -5,6 +5,67 @@
   <div class="ok" *ngIf="message">{{ message }}</div>
   <div class="error" *ngIf="error">{{ error }}</div>
 
+  <!-- ===================== USERS (admin only) ===================== -->
+  <div class="card" *ngIf="isAdmin">
+    <h3>Manage users</h3>
+    <p class="hint">Roles: admin (full) · editor (process + symbols) · viewer (read-only)</p>
+
+    <div class="form-grid">
+      <label>Username
+        <input [(ngModel)]="newUser.username" />
+      </label>
+      <label>Password
+        <input type="password" [(ngModel)]="newUser.password" />
+      </label>
+      <label>Full name
+        <input [(ngModel)]="newUser.full_name" />
+      </label>
+      <label>Email
+        <input type="email" [(ngModel)]="newUser.email" />
+      </label>
+      <label>Role
+        <select [(ngModel)]="newUser.role">
+          <option value="admin">admin</option>
+          <option value="editor">editor</option>
+          <option value="viewer">viewer</option>
+        </select>
+      </label>
+    </div>
+    <button class="btn" (click)="createUserAccount()">Create user</button>
+
+    <h4 class="sub">Existing users</h4>
+    <div class="user-table" *ngIf="users.length">
+      <div class="user-row head">
+        <span>Username</span>
+        <span>Role</span>
+        <span>Status</span>
+        <span>Actions</span>
+      </div>
+      <div class="user-row" *ngFor="let u of users">
+        <span>
+          <strong>{{ u.username }}</strong>
+          <small *ngIf="u.full_name"> · {{ u.full_name }}</small>
+        </span>
+        <span>
+          <select [ngModel]="u.role" (ngModelChange)="setUserRole(u, $event)">
+            <option value="admin">admin</option>
+            <option value="editor">editor</option>
+            <option value="viewer">viewer</option>
+          </select>
+        </span>
+        <span [class.off]="!u.is_active">{{ u.is_active ? 'Active' : 'Disabled' }}</span>
+        <span class="actions">
+          <button class="btn mini" (click)="toggleUserActive(u)">
+            {{ u.is_active ? 'Disable' : 'Enable' }}
+          </button>
+          <button class="btn mini danger-btn" (click)="deleteUserAccount(u)">
+            Delete
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+
   <!-- ===================== COMPANY ===================== -->
   <div class="card">
     <h3>Process company (scrape + values + symbols)</h3>

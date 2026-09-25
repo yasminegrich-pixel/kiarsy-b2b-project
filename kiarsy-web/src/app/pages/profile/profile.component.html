@@ -1,0 +1,46 @@
+<section class="page">
+  <h2>My profile</h2>
+  <p class="muted">Update your account details and password.</p>
+
+  <div class="ok" *ngIf="message">{{ message }}</div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="card">
+    <h3>Account details</h3>
+    <div class="form-grid">
+      <label>Username
+        <input [(ngModel)]="profile.username" />
+      </label>
+      <label>Full name
+        <input [(ngModel)]="profile.full_name" />
+      </label>
+      <label>Email
+        <input type="email" [(ngModel)]="profile.email" />
+      </label>
+      <label>Role
+        <input [ngModel]="profile.role" disabled />
+      </label>
+    </div>
+    <button class="btn" [disabled]="loading" (click)="saveProfile()">
+      Save profile
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>Change password</h3>
+    <div class="form-grid">
+      <label>Current password
+        <input type="password" [(ngModel)]="currentPassword" />
+      </label>
+      <label>New password
+        <input type="password" [(ngModel)]="newPassword" />
+      </label>
+      <label>Confirm new password
+        <input type="password" [(ngModel)]="confirmPassword" />
+      </label>
+    </div>
+    <button class="btn" [disabled]="loading" (click)="savePassword()">
+      Update password
+    </button>
+  </div>
+</section>
