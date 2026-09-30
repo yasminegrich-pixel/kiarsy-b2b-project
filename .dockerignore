@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.env
+backups/
+archive/
+reports/
+kiarsy-web/node_modules/
+kiarsy-web/dist/
+*.dump
