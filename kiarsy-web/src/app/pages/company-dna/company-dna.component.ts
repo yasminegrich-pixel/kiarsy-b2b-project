@@ -53,7 +53,7 @@ export class CompanyDnaComponent implements OnInit {
       next: (res: any) => {
         this.dimensions = res.dimensions || [];
         this.loading = false;
-        setTimeout(() => this.renderRadar(), 0);
+        requestAnimationFrame(() => this.renderRadar(), 0);
       },
       error: () => (this.loading = false),
     });
@@ -63,17 +63,24 @@ export class CompanyDnaComponent implements OnInit {
     return this.matches[0]?.symbol_name || '—';
   }
 
-  private renderRadar() {
-    if (!this.radarCanvas || this.dimensions.length === 0) return;
+    private renderRadar() {
+    if (!this.radarCanvas) return;
+    const canvas = this.radarCanvas.nativeElement;
+    if (!canvas || this.dimensions.length === 0) return;
 
-    const labels = this.dimensions.map((d) => d.dimension_name);
+    const labels = this.dimensions.map((d) => d.dimension_name || d.dimension_id);
     const data = this.dimensions.map((d) => Number(d.final_position) || 0);
 
     if (this.chart) {
       this.chart.destroy();
+      this.chart = undefined;
     }
 
-    this.chart = new Chart(this.radarCanvas.nativeElement, {
+    // ensure canvas has a real size
+    canvas.width = canvas.clientWidth || 640;
+    canvas.height = 360;
+
+    this.chart = new Chart(canvas, {
       type: 'radar',
       data: {
         labels,
@@ -83,31 +90,31 @@ export class CompanyDnaComponent implements OnInit {
             data,
             fill: true,
             backgroundColor: 'rgba(225, 29, 72, 0.25)',
-            borderColor: 'rgba(225, 29, 72, 0.9)',
+            borderColor: 'rgba(225, 29, 72, 0.95)',
             pointBackgroundColor: 'rgba(225, 29, 72, 1)',
             pointRadius: 3,
+            borderWidth: 2,
           },
         ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-          legend: { display: false },
-        },
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
         scales: {
           r: {
             min: 0,
             max: 1,
-            ticks: { display: false },
+            beginAtZero: true,
+            ticks: { display: false, stepSize: 0.2 },
             pointLabels: {
               font: { size: 10 },
               color: '#57534e',
             },
-            grid: { color: 'rgba(0,0,0,0.06)' },
+            grid: { color: 'rgba(0,0,0,0.08)' },
+            angleLines: { color: 'rgba(0,0,0,0.06)' },
           },
         },
       },
     });
   }
-}

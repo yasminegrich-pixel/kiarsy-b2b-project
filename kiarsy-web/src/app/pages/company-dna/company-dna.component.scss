@@ -58,6 +58,13 @@
   box-shadow: var(--shadow);
   border: 1px solid rgba(231, 229, 228, 0.9);
   max-width: 760px;
+  height: 380px;
+  position: relative;
+}
+
+.radar-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .grid {
